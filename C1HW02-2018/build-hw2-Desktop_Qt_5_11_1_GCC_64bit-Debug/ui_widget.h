@@ -250,8 +250,9 @@ public:
         verticalSlider_ADJ_SA_BC_B = new QSlider(frame_ADJ_SA_BC);
         verticalSlider_ADJ_SA_BC_B->setObjectName(QStringLiteral("verticalSlider_ADJ_SA_BC_B"));
         verticalSlider_ADJ_SA_BC_B->setGeometry(QRect(20, 10, 80, 251));
-        verticalSlider_ADJ_SA_BC_B->setMinimum(-100);
-        verticalSlider_ADJ_SA_BC_B->setMaximum(100);
+        verticalSlider_ADJ_SA_BC_B->setMinimum(-255);
+        verticalSlider_ADJ_SA_BC_B->setMaximum(255);
+        verticalSlider_ADJ_SA_BC_B->setPageStep(1);
         verticalSlider_ADJ_SA_BC_B->setValue(0);
         verticalSlider_ADJ_SA_BC_B->setOrientation(Qt::Vertical);
         lcdNumber_Bri = new QLCDNumber(frame_ADJ_SA_BC);

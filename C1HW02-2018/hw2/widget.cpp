@@ -36,8 +36,48 @@ Widget::Widget(QWidget *parent) :
     connect(ui->pushButton_convert, SIGNAL(clicked()), this, SLOT(convert_to_grayscaleI()));
     connect(ui->checkBox, SIGNAL(clicked(bool)), this, SLOT(display_compareImg(bool)));
     connect(ui->horizontalSlider_ADJ_TH, SIGNAL(valueChanged(int)), this, SLOT(set_value_of_threshold(int)));
+    connect(ui->verticalSlider_ADJ_SA_BC_B, SIGNAL(valueChanged(int)), this, SLOT(set_value_of_brightness(int)));
+    connect(ui->verticalSlider_ADJ_SA_BC_C, SIGNAL(valueChanged(int)), this, SLOT(set_value_of_constrast(int)));
 //    connect(ui->pushButton_Run, SIGNAL(clicked()), this, SLOT(exec_threshold_func()));
 }
+
+void Widget::exec_brightness_func(){
+    cout << valBrightness << endl;
+    QImage br_gaaImg = gaaImg;
+    QImage br_gbaImg = gbaImg;
+    int width = br_gaaImg.width();
+    int height = br_gaaImg.height();
+    for(int i=0;i<width;i++){
+        for(int j=0;j<height;j++){
+            QRgb qrgb_perPix_ga = br_gaaImg.pixel(i, j);
+            int setPix = qRed(qrgb_perPix_ga)+valBrightness;
+            if(setPix>255) setPix=255;
+            else if(setPix<0) setPix=0;
+            br_gaaImg.setPixel(i, j, qRgb(setPix, setPix, setPix));
+
+            QRgb qrgb_perPix_gb = br_gbaImg.pixel(i, j);
+            setPix = qRed(qrgb_perPix_gb)+valBrightness;
+            if(setPix>255) setPix=255;
+            else if(setPix<0) setPix=0;
+            br_gbaImg.setPixel(i, j, qRgb(setPix, setPix, setPix));
+        }
+    }
+    ui->label_GAA_i->setPixmap(QPixmap::fromImage(br_gaaImg.scaled(400,400,Qt::KeepAspectRatio)));
+    ui->label_GBA_i->setPixmap(QPixmap::fromImage(br_gbaImg.scaled(400,400,Qt::KeepAspectRatio)));
+}
+
+void Widget::set_value_of_brightness(int val){
+    valBrightness = val;
+    ui->lcdNumber_Bri->display(val);
+    exec_brightness_func();
+}
+
+void Widget::set_value_of_constrast(int val){
+    valBrightness = val;
+    ui->lcdNumber_CON->display(val);
+//    exec_threshold_func();
+}
+
 void Widget::set_value_of_threshold(int val){
     valThreshold = val;
     ui->lcdNumber_THRE->display(val);
@@ -54,11 +94,11 @@ void Widget::exec_threshold_func(){
             QRgb qrgb_perPix_ga = thre_gaaImg.pixel(i, j);
             if(qRed(qrgb_perPix_ga)>=valThreshold) qrgb_perPix_ga=qRgb(255,255,255);
             else qrgb_perPix_ga=qRgb(0,0,0);
-            thre_gaaImg.setPixel(i, j, qRgb(qrgb_perPix_ga, qrgb_perPix_ga, qrgb_perPix_ga));
+            thre_gaaImg.setPixel(i, j, qrgb_perPix_ga);
             QRgb qrgb_perPix_gb = thre_gbaImg.pixel(i, j);
             if(qRed(qrgb_perPix_gb)>=valThreshold) qrgb_perPix_gb=qRgb(255,255,255);
             else qrgb_perPix_gb=qRgb(0,0,0);
-            thre_gbaImg.setPixel(i, j, qRgb(qrgb_perPix_gb, qrgb_perPix_gb, qrgb_perPix_gb));
+            thre_gbaImg.setPixel(i, j, qrgb_perPix_gb);
         }
     }
     ui->label_GAA_i->setPixmap(QPixmap::fromImage(thre_gaaImg.scaled(400,400,Qt::KeepAspectRatio)));

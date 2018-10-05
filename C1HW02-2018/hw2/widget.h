@@ -30,7 +30,8 @@ private slots:
     void convert_to_grayscaleI(void);
     void display_compareImg(bool);
     void set_value_of_threshold(int);
-
+    void set_value_of_brightness(int);
+    void set_value_of_constrast(int);
 
 private:
     Ui::Widget *ui;
@@ -45,7 +46,10 @@ private:
     QImage gaaImg;
     QImage gbaImg;
     int valThreshold;
+    int valBrightness;
+    int valContrast;
     void exec_threshold_func();
+    void exec_brightness_func();
 
 };
 
