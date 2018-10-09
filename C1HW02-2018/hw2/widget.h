@@ -38,6 +38,7 @@ private slots:
     void set_value_of_brightness(int);
     void set_value_of_constrast(int);
     void set_value_of_scale(int);
+    void display_grayscale(int);
     void test_func();
     void display_HE();
 
@@ -53,8 +54,8 @@ private:
     QImage gbaImg;
     int valThreshold;
     int valBrightness;
-    double valContrast;
-    void exec_threshold_func();
+    double valContrast=0;
+    void exec_threshold_func(int val);
     void exec_ConBri_func();
     void exec_spatial_resolution(int val);
     void create_histogram(QImage* image, QHBoxLayout* layout);
@@ -64,6 +65,7 @@ private:
     int height_g;
     double valScale;
     QImage exec_HE(vector<int> v, QImage* image);
+    void exec_GS(int bits);
 };
 
 #endif // WIDGET_H

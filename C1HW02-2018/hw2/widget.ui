@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1580</width>
+    <width>1581</width>
     <height>1030</height>
    </rect>
   </property>
@@ -390,19 +390,6 @@
      <string>Histogram equalization</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_RESET">
-    <property name="geometry">
-     <rect>
-      <x>568</x>
-      <y>394</y>
-      <width>101</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Reset</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="widget_ADJ_SA" native="true">
     <property name="geometry">
      <rect>
@@ -673,6 +660,9 @@
        <height>25</height>
       </rect>
      </property>
+     <property name="currentText">
+      <string>8 bits</string>
+     </property>
      <item>
       <property name="text">
        <string>8 bits</string>
@@ -701,7 +691,6 @@
    <zorder>label_ADJ</zorder>
    <zorder>comboBox_ADJ</zorder>
    <zorder>pushButton_ADJ_H</zorder>
-   <zorder>pushButton_RESET</zorder>
   </widget>
   <widget class="QGroupBox" name="groupBox_GBA">
    <property name="geometry">

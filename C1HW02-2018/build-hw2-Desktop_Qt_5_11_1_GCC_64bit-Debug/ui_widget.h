@@ -112,7 +112,7 @@ public:
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName(QStringLiteral("Widget"));
-        Widget->resize(1580, 1030);
+        Widget->resize(1581, 1030);
         Widget->setMinimumSize(QSize(1580, 1030));
         groupBox_OI = new QGroupBox(Widget);
         groupBox_OI->setObjectName(QStringLiteral("groupBox_OI"));
@@ -309,6 +309,7 @@ public:
         verticalSlider_ADJ_ES->setGeometry(QRect(5, 10, 151, 270));
         verticalSlider_ADJ_ES->setMinimum(1);
         verticalSlider_ADJ_ES->setMaximum(10);
+        verticalSlider_ADJ_ES->setPageStep(1);
         verticalSlider_ADJ_ES->setValue(1);
         verticalSlider_ADJ_ES->setOrientation(Qt::Vertical);
         lcdNumber_ADJ_ES = new QLCDNumber(frame_ADJ_ES);
@@ -522,6 +523,7 @@ public:
         comboBox_ADJ_ES_GS->setItemText(2, QApplication::translate("Widget", "2 bits", nullptr));
         comboBox_ADJ_ES_GS->setItemText(3, QApplication::translate("Widget", "1 bits", nullptr));
 
+        comboBox_ADJ_ES_GS->setCurrentText(QApplication::translate("Widget", "8 bits", nullptr));
         groupBox_GBA->setTitle(QApplication::translate("Widget", "GRAY B. after adjust.", nullptr));
         toolButton_GBA->setText(QApplication::translate("Widget", "\342\206\227 ", nullptr));
         label_GBA_i->setText(QString());
