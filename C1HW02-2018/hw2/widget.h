@@ -8,6 +8,11 @@
 #include <iostream>
 #include <QLabel>
 #include <QFileDialog>
+#include <QtCharts>
+#include <fstream>
+#include <iostream>
+#include <vector>
+#include <sstream>
 using namespace std;
 
 namespace Ui {
@@ -32,13 +37,14 @@ private slots:
     void set_value_of_threshold(int);
     void set_value_of_brightness(int);
     void set_value_of_constrast(int);
+    void set_value_of_scale(int);
+    void test_func();
+    void display_HE();
 
 private:
     Ui::Widget *ui;
-    QLabel* histograms_arr[4];
+    QWidget* histograms_arr[4];
     QToolButton* convertBtn_arr[5];
-//    void choose_image(const QString &title, QImage* image, QGraphicsView* QGView);
-//    void load_image(const QString &fileName, QImage* image, QGraphicsView* QGView);
     QImage oriImg;
     QImage gaImg;
     QImage gbImg;
@@ -47,10 +53,17 @@ private:
     QImage gbaImg;
     int valThreshold;
     int valBrightness;
-    int valContrast;
+    double valContrast;
     void exec_threshold_func();
-    void exec_brightness_func();
-
+    void exec_ConBri_func();
+    void exec_spatial_resolution(int val);
+    void create_histogram(QImage* image, QHBoxLayout* layout);
+    vector<int> histogram_ga;
+    vector<int> histogram_gb;
+    int width_g;
+    int height_g;
+    double valScale;
+    QImage exec_HE(vector<int> v, QImage* image);
 };
 
 #endif // WIDGET_H

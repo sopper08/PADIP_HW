@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1580</width>
-    <height>1059</height>
+    <height>1030</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -79,7 +79,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QWidget" name="widget" native="true">
+   <widget class="QWidget" name="widget_OI_WH" native="true">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -90,7 +90,7 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_OI_WH_SUBTITLE">
        <property name="text">
         <string>W x H: </string>
        </property>
@@ -100,7 +100,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_OI_WH">
+      <widget class="QLabel" name="label_OI_WH_NUM">
        <property name="text">
         <string>0 x 0</string>
        </property>
@@ -114,7 +114,7 @@
    <zorder>pushButton_OI_CF</zorder>
    <zorder>label_OI_i</zorder>
    <zorder>toolButton_OI</zorder>
-   <zorder>widget</zorder>
+   <zorder>widget_OI_WH</zorder>
   </widget>
   <widget class="QPushButton" name="pushButton_convert">
    <property name="geometry">
@@ -208,23 +208,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_GA_h">
-    <property name="geometry">
-     <rect>
-      <x>25</x>
-      <y>30</y>
-      <width>380</width>
-      <height>380</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget_2" native="true">
+   <widget class="QWidget" name="widget_GA_WH" native="true">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -235,7 +219,7 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="label_GA_WH_SUBTITLE">
        <property name="text">
         <string>W x H: </string>
        </property>
@@ -245,7 +229,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_GA_WH">
+      <widget class="QLabel" name="label_GA_WH_NUM">
        <property name="text">
         <string>0 x 0</string>
        </property>
@@ -256,11 +240,39 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="widget_GA_h" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>410</width>
+      <height>280</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="horizontalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>9</y>
+       <width>391</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_GA_h">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+     </layout>
+    </widget>
+   </widget>
    <zorder>label_GA</zorder>
    <zorder>label_GA_i</zorder>
-   <zorder>label_GA_h</zorder>
    <zorder>toolButton_GA</zorder>
-   <zorder>widget_2</zorder>
+   <zorder>widget_GA_WH</zorder>
+   <zorder>widget_GA_h</zorder>
   </widget>
   <widget class="QGroupBox" name="groupBox_ADJ">
    <property name="geometry">
@@ -302,7 +314,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
-    <widget class="QLCDNumber" name="lcdNumber_THRE">
+    <widget class="QLCDNumber" name="lcdNumber_ADJ_TH">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -322,7 +334,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="label_ADJ">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -346,7 +358,7 @@
     </property>
     <item>
      <property name="text">
-      <string>Simple Adjustment</string>
+      <string>Brightness &amp; Constrast Adjustment</string>
      </property>
     </item>
     <item>
@@ -359,239 +371,11 @@
       <string>Histogram equalization</string>
      </property>
     </item>
-   </widget>
-   <widget class="QFrame" name="frame_ADJ_SA">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>80</y>
-      <width>391</width>
-      <height>381</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="label_9">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>11</y>
-       <width>201</width>
-       <height>40</height>
-      </rect>
-     </property>
+    <item>
      <property name="text">
-      <string>Adjust the brightness and constrast.</string>
+      <string>Enlarge or Shrink &amp; Grayscale</string>
      </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QFrame" name="frame_ADJ_SA_BC">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>201</width>
-       <height>321</height>
-      </rect>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="label_ADJ_SA_BC_B">
-      <property name="geometry">
-       <rect>
-        <x>15</x>
-        <y>260</y>
-        <width>80</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Brightness</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_ADJ_SA_BC_C">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>260</y>
-        <width>80</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Constrast</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QSlider" name="verticalSlider_ADJ_SA_BC_C">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>10</y>
-        <width>80</width>
-        <height>251</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>-100</number>
-      </property>
-      <property name="maximum">
-       <number>100</number>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QSlider" name="verticalSlider_ADJ_SA_BC_B">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>10</y>
-        <width>80</width>
-        <height>251</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>-255</number>
-      </property>
-      <property name="maximum">
-       <number>255</number>
-      </property>
-      <property name="pageStep">
-       <number>1</number>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLCDNumber" name="lcdNumber_Bri">
-      <property name="geometry">
-       <rect>
-        <x>15</x>
-        <y>280</y>
-        <width>80</width>
-        <height>25</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLCDNumber" name="lcdNumber_CON">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>280</y>
-        <width>80</width>
-        <height>25</height>
-       </rect>
-      </property>
-     </widget>
-     <zorder>verticalSlider_ADJ_SA_BC_B</zorder>
-     <zorder>label_ADJ_SA_BC_B</zorder>
-     <zorder>label_ADJ_SA_BC_C</zorder>
-     <zorder>verticalSlider_ADJ_SA_BC_C</zorder>
-     <zorder>lcdNumber_Bri</zorder>
-     <zorder>lcdNumber_CON</zorder>
-    </widget>
-    <widget class="QFrame" name="frame_5">
-     <property name="geometry">
-      <rect>
-       <x>220</x>
-       <y>50</y>
-       <width>161</width>
-       <height>321</height>
-      </rect>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="label_13">
-      <property name="geometry">
-       <rect>
-        <x>-1</x>
-        <y>260</y>
-        <width>161</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Enlarge &amp; Shrink</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QSlider" name="verticalSlider_2">
-      <property name="geometry">
-       <rect>
-        <x>5</x>
-        <y>10</y>
-        <width>151</width>
-        <height>251</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>100</number>
-      </property>
-      <property name="value">
-       <number>50</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLCDNumber" name="lcdNumber_ES">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>280</y>
-        <width>80</width>
-        <height>25</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QLabel" name="label_10">
-     <property name="geometry">
-      <rect>
-       <x>220</x>
-       <y>11</y>
-       <width>161</width>
-       <height>40</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Adjust the spatial resolution.</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
+    </item>
    </widget>
    <widget class="QPushButton" name="pushButton_ADJ_H">
     <property name="geometry">
@@ -619,19 +403,305 @@
      <string>Reset</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_Run">
+   <widget class="QWidget" name="widget_ADJ_SA" native="true">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>394</y>
-      <width>101</width>
-      <height>31</height>
+      <x>9</x>
+      <y>79</y>
+      <width>221</width>
+      <height>391</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Run</string>
-    </property>
+    <widget class="QLabel" name="label_ADJ_SA_BC">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>201</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Adjust the brightness and constrast.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_ADJ_SA_BC">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>201</width>
+       <height>340</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_ADJ_SA_BC_B">
+      <property name="geometry">
+       <rect>
+        <x>15</x>
+        <y>280</y>
+        <width>80</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Brightness</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_ADJ_SA_BC_C">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>280</y>
+        <width>80</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Constrast</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QSlider" name="verticalSlider_ADJ_SA_BC_C">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>10</y>
+        <width>80</width>
+        <height>270</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>-50</number>
+      </property>
+      <property name="maximum">
+       <number>50</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="pageStep">
+       <number>1</number>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="verticalSlider_ADJ_SA_BC_B">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>80</width>
+        <height>270</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>-255</number>
+      </property>
+      <property name="maximum">
+       <number>255</number>
+      </property>
+      <property name="pageStep">
+       <number>1</number>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLCDNumber" name="lcdNumber_ADJ_SA_BC_B">
+      <property name="geometry">
+       <rect>
+        <x>15</x>
+        <y>300</y>
+        <width>80</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLCDNumber" name="lcdNumber_ADJ_SA_BC_C">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>300</y>
+        <width>80</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <zorder>verticalSlider_ADJ_SA_BC_B</zorder>
+     <zorder>label_ADJ_SA_BC_B</zorder>
+     <zorder>label_ADJ_SA_BC_C</zorder>
+     <zorder>verticalSlider_ADJ_SA_BC_C</zorder>
+     <zorder>lcdNumber_ADJ_SA_BC_B</zorder>
+     <zorder>lcdNumber_ADJ_SA_BC_C</zorder>
+    </widget>
    </widget>
+   <widget class="QWidget" name="widget_ADJ_ES" native="true">
+    <property name="geometry">
+     <rect>
+      <x>229</x>
+      <y>79</y>
+      <width>331</width>
+      <height>391</height>
+     </rect>
+    </property>
+    <widget class="QFrame" name="frame_ADJ_ES">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>160</width>
+       <height>341</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_ADJ_ES_SUBTITLE">
+      <property name="geometry">
+       <rect>
+        <x>-1</x>
+        <y>280</y>
+        <width>161</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Enlarge &amp; Shrink</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QSlider" name="verticalSlider_ADJ_ES">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>10</y>
+        <width>151</width>
+        <height>270</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>10</number>
+      </property>
+      <property name="pageStep">
+       <number>1</number>
+      </property>
+      <property name="value">
+       <number>1</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLCDNumber" name="lcdNumber_ADJ_ES">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>300</y>
+        <width>80</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="label_ADJ_ES_TITLE">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>161</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Adjust the spatial resolution.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ADJ_ES_GS_TITLE">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>190</y>
+       <width>141</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Grayscale</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_ADJ_ES_GS">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>220</y>
+       <width>86</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>8 bits</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4 bits</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2 bits</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1 bits</string>
+      </property>
+     </item>
+    </widget>
+   </widget>
+   <zorder>widget_ADJ_ES</zorder>
+   <zorder>widget_ADJ_SA</zorder>
+   <zorder>groupBox_ADJ_TH</zorder>
+   <zorder>label_ADJ</zorder>
+   <zorder>comboBox_ADJ</zorder>
+   <zorder>pushButton_ADJ_H</zorder>
+   <zorder>pushButton_RESET</zorder>
   </widget>
   <widget class="QGroupBox" name="groupBox_GBA">
    <property name="geometry">
@@ -671,23 +741,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_GBA_h">
-    <property name="geometry">
-     <rect>
-      <x>25</x>
-      <y>35</y>
-      <width>380</width>
-      <height>380</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget_5" native="true">
+   <widget class="QWidget" name="widget_GBA_WH" native="true">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -698,7 +752,7 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="label_GBA_WH_SUBTITLE">
        <property name="text">
         <string>W x H: </string>
        </property>
@@ -708,7 +762,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_GBA_WH">
+      <widget class="QLabel" name="label_GBA_WH_NUM">
        <property name="text">
         <string>0 x 0</string>
        </property>
@@ -719,10 +773,34 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="widget_GBA_h" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>410</width>
+      <height>280</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="horizontalLayoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>9</y>
+       <width>391</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_GBA_h"/>
+    </widget>
+   </widget>
    <zorder>label_GBA_i</zorder>
-   <zorder>label_GBA_h</zorder>
    <zorder>toolButton_GBA</zorder>
-   <zorder>widget_5</zorder>
+   <zorder>widget_GBA_WH</zorder>
+   <zorder>widget_GBA_h</zorder>
   </widget>
   <widget class="QGroupBox" name="groupBox_GAA">
    <property name="geometry">
@@ -768,23 +846,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_GAA_h">
-    <property name="geometry">
-     <rect>
-      <x>25</x>
-      <y>35</y>
-      <width>380</width>
-      <height>380</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget_3" native="true">
+   <widget class="QWidget" name="widget_GAA_WH" native="true">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -795,7 +857,7 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="label_GAA_WH_SUBTITLE">
        <property name="text">
         <string>W x H: </string>
        </property>
@@ -805,7 +867,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_GAA_WH">
+      <widget class="QLabel" name="label_GAA_WH_NUM">
        <property name="text">
         <string>0 x 0</string>
        </property>
@@ -816,12 +878,36 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="widget_GAA_h" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>410</width>
+      <height>280</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="horizontalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>9</y>
+       <width>391</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_GAA_h"/>
+    </widget>
+   </widget>
    <zorder>label_GAA_i</zorder>
-   <zorder>label_GAA_h</zorder>
    <zorder>toolButton_GAA</zorder>
-   <zorder>widget_3</zorder>
+   <zorder>widget_GAA_WH</zorder>
+   <zorder>widget_GAA_h</zorder>
   </widget>
-  <widget class="QCheckBox" name="checkBox">
+  <widget class="QCheckBox" name="checkBox_COMPARE">
    <property name="geometry">
     <rect>
      <x>449</x>
@@ -894,23 +980,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_GB_h">
-    <property name="geometry">
-     <rect>
-      <x>25</x>
-      <y>35</y>
-      <width>380</width>
-      <height>380</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget_6" native="true">
+   <widget class="QWidget" name="widget_GB_WH" native="true">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -921,7 +991,7 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <item>
-      <widget class="QLabel" name="label_8">
+      <widget class="QLabel" name="label_GB_WH_SUBTITLE">
        <property name="text">
         <string>W x H: </string>
        </property>
@@ -931,7 +1001,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_GB_WH">
+      <widget class="QLabel" name="label_GB_WH_NUM">
        <property name="text">
         <string>0 x 0</string>
        </property>
@@ -942,11 +1012,35 @@
      </item>
     </layout>
    </widget>
-   <zorder>label_GB</zorder>
+   <widget class="QWidget" name="widget_GB_h" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>410</width>
+      <height>280</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="horizontalLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>9</y>
+       <width>391</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_GB_h"/>
+    </widget>
+   </widget>
    <zorder>label_GB_i</zorder>
-   <zorder>label_GB_h</zorder>
+   <zorder>label_GB</zorder>
    <zorder>toolButton_GB</zorder>
-   <zorder>widget_6</zorder>
+   <zorder>widget_GB_WH</zorder>
+   <zorder>widget_GB_h</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
