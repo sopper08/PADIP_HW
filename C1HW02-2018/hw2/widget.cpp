@@ -54,11 +54,8 @@ void Widget::choose_source(){
         QImage resizeImg;
         resizeImg.load(fileName);
         oriImg = resizeImg.scaled(400,400,Qt::KeepAspectRatio);
+        display_WandH(&oriImg,ui->label_OI_WH_NUM);
         ui->label_OI_i->setPixmap(QPixmap::fromImage(oriImg));
-        int width = oriImg.width();
-        int height = oriImg.height();
-        string str = to_string(width)+" x "+to_string(height);
-        ui->label_OI_WH_NUM->setText(QString::fromStdString(str));
     }
 }
 
@@ -80,8 +77,6 @@ void Widget::convert_to_grayscaleI(){
             if(compare_pix<0) compare_pix=-compare_pix;
             gaImg.setPixel(i, j, qRgb(graya_pix, graya_pix, graya_pix));
             gbImg.setPixel(i, j, qRgb(grayb_pix, grayb_pix, grayb_pix));
-//            gaaImg.setPixel(i, j, qRgb(graya_pix, graya_pix, graya_pix));
-//            gbaImg.setPixel(i, j, qRgb(grayb_pix, grayb_pix, grayb_pix));
             compareImg.setPixel(i, j, qRgb(compare_pix, compare_pix, compare_pix));
         }
         ui->progressBar->setValue(80*i/oriHeight+1);
@@ -93,15 +88,14 @@ void Widget::convert_to_grayscaleI(){
     // Display GA
     ui->label_GA_i->setPixmap(QPixmap::fromImage(gaImg.scaled(400,400,Qt::KeepAspectRatio)));
     create_histogram(&gaImg,ui->horizontalLayout_GA_h);
+    display_WandH(&gaImg,ui->label_GA_WH_NUM);
     // Display GB
     ui->label_GB_i->setPixmap(QPixmap::fromImage(gbImg.scaled(400,400,Qt::KeepAspectRatio)));
     create_histogram(&gbImg,ui->horizontalLayout_GB_h);
-    // Display GAA
-    ui->label_GAA_i->setPixmap(QPixmap::fromImage(gaaImg.scaled(400,400,Qt::KeepAspectRatio)));
-    create_histogram(&gaaImg,ui->horizontalLayout_GAA_h);
-    // Display GBA
-    ui->label_GBA_i->setPixmap(QPixmap::fromImage(gbaImg.scaled(400,400,Qt::KeepAspectRatio)));
-    create_histogram(&gbaImg,ui->horizontalLayout_GBA_h);
+    display_WandH(&gbImg,ui->label_GB_WH_NUM);
+    // Display GAA & GBA
+    display_A_IandH(&gaaImg,&gbaImg);
+
     ui->progressBar->setValue(90);
     // Record the gaImg & gbImg histogram value
     histogram_ga = vector<int>(256,0);
@@ -146,10 +140,6 @@ void Widget::set_ADJ_visible(int state){
         ui->widget_ADJ_ES->setVisible(true);
         ui->groupBox_ADJ_TH->setVisible(false);
         ui->pushButton_ADJ_H->setVisible(false);
-//        ui->label_GAA_i->setPixmap(QPixmap::fromImage(gaImg));
-//        ui->label_GBA_i->setPixmap(QPixmap::fromImage(gbImg));
-
-
     default:
         break;
     }
@@ -217,7 +207,6 @@ void Widget::create_histogram(QImage* image, QHBoxLayout* layout){
 
 /* Threshold function */
 void Widget::set_value_of_threshold(int val){
-//    valThreshold = val;
     ui->lcdNumber_ADJ_TH->display(val);
     exec_threshold_func(val);
 }
@@ -240,10 +229,7 @@ void Widget::exec_threshold_func(int val){
             thre_gbaImg.setPixel(i, j, qrgb_perPix_gb);
         }
     }
-    ui->label_GAA_i->setPixmap(QPixmap::fromImage(thre_gaaImg.scaled(400,400,Qt::KeepAspectRatio)));
-    create_histogram(&thre_gaaImg,ui->horizontalLayout_GAA_h);
-    ui->label_GBA_i->setPixmap(QPixmap::fromImage(thre_gbaImg.scaled(400,400,Qt::KeepAspectRatio)));
-    create_histogram(&thre_gbaImg,ui->horizontalLayout_GBA_h);
+    display_A_IandH(&thre_gaaImg,&thre_gaaImg);
 }
 
 /* Spatial resolution */
@@ -289,84 +275,39 @@ void Widget::exec_spatial_resolution(int val){
     }
     ui->label_GAA_i->setPixmap(QPixmap::fromImage(*spatial_gaaimage));
     create_histogram(spatial_gaaimage,ui->horizontalLayout_GAA_h);
+
     ui->label_GBA_i->setPixmap(QPixmap::fromImage(*spatial_gbaimage));
     create_histogram(spatial_gbaimage,ui->horizontalLayout_GBA_h);
+
+    string str = to_string(width*valScale)+" x "+to_string(height*valScale);
+    ui->label_GAA_WH_NUM->setText(QString::fromStdString(str));
+    ui->label_GBA_WH_NUM->setText(QString::fromStdString(str));
 }
 
 /* Grayscale level */
 void Widget::display_grayscale(int val){
+    int bits=pow(2,3-val);
+    exec_GS(bits);
+}
 
+void Widget::exec_GS(int bits){
     QImage GS_gaaImg = gaImg.copy();
     QImage GS_gbaImg = gbImg.copy();
     int width = GS_gaaImg.width();
     int height = GS_gaaImg.height();
-    switch (val) {
-    case 0:
-        ui->label_GAA_i->setPixmap(QPixmap::fromImage(GS_gaaImg.scaled(400,400,Qt::KeepAspectRatio)));
-        create_histogram(&GS_gaaImg,ui->horizontalLayout_GAA_h);
-        ui->label_GBA_i->setPixmap(QPixmap::fromImage(GS_gbaImg.scaled(400,400,Qt::KeepAspectRatio)));
-        create_histogram(&GS_gbaImg,ui->horizontalLayout_GBA_h);
-        break;
-    case 1:
-        for(int i=0;i<width;i++){
-            for(int j=0;j<height;j++){
-                int pix = qRed(GS_gaaImg.pixel(i,j));
-                pix /= (256/16);
-                int setPix = pix*(256/16);
-                GS_gaaImg.setPixel(i,j,qRgb(setPix,setPix,setPix));
-                pix = qRed(GS_gbaImg.pixel(i,j));
-                pix /= (256/16);
-                setPix = pix*(256/16);
-                GS_gbaImg.setPixel(i,j,qRgb(setPix,setPix,setPix));
-            }
+    for(int i=0;i<width;i++){
+        for(int j=0;j<height;j++){
+            int pix = qRed(GS_gaaImg.pixel(i,j));
+            pix /= (256/pow(2,bits));
+            int setPix = pix*(256/pow(2,bits));
+            GS_gaaImg.setPixel(i,j,qRgb(setPix,setPix,setPix));
+            pix = qRed(GS_gbaImg.pixel(i,j));
+            pix /= (256/pow(2,bits));
+            setPix = pix*(256/pow(2,bits));
+            GS_gbaImg.setPixel(i,j,qRgb(setPix,setPix,setPix));
         }
-        ui->label_GAA_i->setPixmap(QPixmap::fromImage(GS_gaaImg.scaled(400,400,Qt::KeepAspectRatio)));
-        create_histogram(&GS_gaaImg,ui->horizontalLayout_GAA_h);
-        ui->label_GBA_i->setPixmap(QPixmap::fromImage(GS_gbaImg.scaled(400,400,Qt::KeepAspectRatio)));
-        create_histogram(&GS_gbaImg,ui->horizontalLayout_GBA_h);
-        break;
-    case 2:
-        for(int i=0;i<width;i++){
-            for(int j=0;j<height;j++){
-                int pix = qRed(GS_gaaImg.pixel(i,j));
-                pix /= (256/4);
-                int setPix = pix*(256/4);
-                GS_gaaImg.setPixel(i,j,qRgb(setPix,setPix,setPix));
-                pix = qRed(GS_gbaImg.pixel(i,j));
-                pix /= (256/4);
-                setPix = pix*(256/4);
-                GS_gbaImg.setPixel(i,j,qRgb(setPix,setPix,setPix));
-            }
-        }
-        ui->label_GAA_i->setPixmap(QPixmap::fromImage(GS_gaaImg.scaled(400,400,Qt::KeepAspectRatio)));
-        create_histogram(&GS_gaaImg,ui->horizontalLayout_GAA_h);
-        ui->label_GBA_i->setPixmap(QPixmap::fromImage(GS_gbaImg.scaled(400,400,Qt::KeepAspectRatio)));
-        create_histogram(&GS_gbaImg,ui->horizontalLayout_GBA_h);
-        break;
-    case 3:
-        for(int i=0;i<width;i++){
-            for(int j=0;j<height;j++){
-                int pix = qRed(GS_gaaImg.pixel(i,j));
-                pix /= (256/2);
-                int setPix = pix*(256/2);
-                GS_gaaImg.setPixel(i,j,qRgb(setPix,setPix,setPix));
-                pix = qRed(GS_gbaImg.pixel(i,j));
-                pix /= (256/2);
-                setPix = pix*(256/2);
-                GS_gbaImg.setPixel(i,j,qRgb(setPix,setPix,setPix));
-            }
-        }
-        ui->label_GAA_i->setPixmap(QPixmap::fromImage(GS_gaaImg.scaled(400,400,Qt::KeepAspectRatio)));
-        create_histogram(&GS_gaaImg,ui->horizontalLayout_GAA_h);
-        ui->label_GBA_i->setPixmap(QPixmap::fromImage(GS_gbaImg.scaled(400,400,Qt::KeepAspectRatio)));
-        create_histogram(&GS_gbaImg,ui->horizontalLayout_GBA_h);
-        break;
-    default:
-        break;
     }
-}
-
-void Widget::exec_GS(int bits){
+    display_A_IandH(&GS_gaaImg,&GS_gaaImg);
 }
 
 /* Brightnes and Constrast */
@@ -408,20 +349,14 @@ void Widget::exec_ConBri_func(){
             gbaImg_ConBri.setPixel(i, j, qRgb(setPix, setPix, setPix));
         }
     }
-    ui->label_GAA_i->setPixmap(QPixmap::fromImage(gaaImg_ConBri.scaled(400,400,Qt::KeepAspectRatio)));
-    create_histogram(&gaaImg_ConBri,ui->horizontalLayout_GAA_h);
-    ui->label_GBA_i->setPixmap(QPixmap::fromImage(gbaImg_ConBri.scaled(400,400,Qt::KeepAspectRatio)));
-    create_histogram(&gbaImg_ConBri,ui->horizontalLayout_GBA_h);
+    display_A_IandH(&gaaImg_ConBri,&gbaImg_ConBri);
 }
 
 /* Histogram equalization */
 void Widget::display_HE(){
     QImage tmp_gaa = exec_HE(histogram_ga, &gaImg);
     QImage tmp_gba = exec_HE(histogram_gb, &gbImg);
-    ui->label_GAA_i->setPixmap(QPixmap::fromImage(tmp_gaa.scaled(400,400,Qt::KeepAspectRatio)));
-    create_histogram(&tmp_gaa,ui->horizontalLayout_GAA_h);
-    ui->label_GBA_i->setPixmap(QPixmap::fromImage(tmp_gba.scaled(400,400,Qt::KeepAspectRatio)));
-    create_histogram(&tmp_gba,ui->horizontalLayout_GBA_h);
+    display_A_IandH(&tmp_gaa,&tmp_gba);
 }
 
 QImage Widget::exec_HE(vector<int> v, QImage* image){
@@ -455,17 +390,31 @@ void Widget::test_func(){
 }
 
 void Widget::display_compareImg(bool b){
-    switch (b) {
-    case true:
+    if(b){
         ui->label_GA_i->setPixmap(QPixmap::fromImage(compareImg.scaled(400,400,Qt::KeepAspectRatio)));
         ui->label_GB_i->setPixmap(QPixmap::fromImage(compareImg.scaled(400,400,Qt::KeepAspectRatio)));
-        break;
-    case false:
+    }else{
         ui->label_GA_i->setPixmap(QPixmap::fromImage(gaImg.scaled(400,400,Qt::KeepAspectRatio)));
         ui->label_GB_i->setPixmap(QPixmap::fromImage(gbImg.scaled(400,400,Qt::KeepAspectRatio)));
-    default:
-        break;
     }
+}
+
+/* display Image and Histogram after processing */
+void Widget::display_A_IandH(QImage* Image1, QImage* Image2){
+    display_WandH(Image1,ui->label_GAA_WH_NUM);
+    display_WandH(Image2,ui->label_GBA_WH_NUM);
+    ui->label_GAA_i->setPixmap(QPixmap::fromImage(Image1->scaled(400,400,Qt::KeepAspectRatio)));
+    create_histogram(Image1,ui->horizontalLayout_GAA_h);
+    ui->label_GBA_i->setPixmap(QPixmap::fromImage(Image2->scaled(400,400,Qt::KeepAspectRatio)));
+    create_histogram(Image2,ui->horizontalLayout_GBA_h);
+}
+
+/* display the W&H of the Image */
+void Widget::display_WandH(QImage* image, QLabel* label){
+    int width = image->width();
+    int height = image->height();
+    string str = to_string(width)+" x "+to_string(height);
+    label->setText(QString::fromStdString(str));
 }
 
 Widget::~Widget()

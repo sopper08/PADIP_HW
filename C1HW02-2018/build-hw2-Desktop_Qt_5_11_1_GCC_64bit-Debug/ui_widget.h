@@ -57,7 +57,6 @@ public:
     QLabel *label_ADJ;
     QComboBox *comboBox_ADJ;
     QPushButton *pushButton_ADJ_H;
-    QPushButton *pushButton_RESET;
     QWidget *widget_ADJ_SA;
     QLabel *label_ADJ_SA_BC;
     QFrame *frame_ADJ_SA_BC;
@@ -240,9 +239,6 @@ public:
         pushButton_ADJ_H = new QPushButton(groupBox_ADJ);
         pushButton_ADJ_H->setObjectName(QStringLiteral("pushButton_ADJ_H"));
         pushButton_ADJ_H->setGeometry(QRect(420, 180, 251, 61));
-        pushButton_RESET = new QPushButton(groupBox_ADJ);
-        pushButton_RESET->setObjectName(QStringLiteral("pushButton_RESET"));
-        pushButton_RESET->setGeometry(QRect(568, 394, 101, 31));
         widget_ADJ_SA = new QWidget(groupBox_ADJ);
         widget_ADJ_SA->setObjectName(QStringLiteral("widget_ADJ_SA"));
         widget_ADJ_SA->setGeometry(QRect(9, 79, 221, 391));
@@ -336,7 +332,6 @@ public:
         label_ADJ->raise();
         comboBox_ADJ->raise();
         pushButton_ADJ_H->raise();
-        pushButton_RESET->raise();
         groupBox_GBA = new QGroupBox(Widget);
         groupBox_GBA->setObjectName(QStringLiteral("groupBox_GBA"));
         groupBox_GBA->setGeometry(QRect(1130, 550, 426, 470));
@@ -511,7 +506,6 @@ public:
         comboBox_ADJ->setItemText(3, QApplication::translate("Widget", "Enlarge or Shrink & Grayscale", nullptr));
 
         pushButton_ADJ_H->setText(QApplication::translate("Widget", "Histogram equalization", nullptr));
-        pushButton_RESET->setText(QApplication::translate("Widget", "Reset", nullptr));
         label_ADJ_SA_BC->setText(QApplication::translate("Widget", "Adjust the brightness and constrast.", nullptr));
         label_ADJ_SA_BC_B->setText(QApplication::translate("Widget", "Brightness", nullptr));
         label_ADJ_SA_BC_C->setText(QApplication::translate("Widget", "Constrast", nullptr));

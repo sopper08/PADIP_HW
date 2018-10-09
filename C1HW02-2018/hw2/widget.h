@@ -66,6 +66,8 @@ private:
     double valScale;
     QImage exec_HE(vector<int> v, QImage* image);
     void exec_GS(int bits);
+    void display_A_IandH(QImage* gaImage, QImage* gbImage);
+    void display_WandH(QImage* image, QLabel* label);
 };
 
 #endif // WIDGET_H
