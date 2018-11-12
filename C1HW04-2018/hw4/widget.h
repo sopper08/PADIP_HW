@@ -22,6 +22,8 @@ class Widget : public QWidget
 
 public:
     explicit Widget(QWidget *parent = 0);
+
+
     ~Widget();
 
 private slots:
@@ -31,11 +33,13 @@ private slots:
 
 private:
     Ui::Widget *ui;
+
     struct imgSandF{
         Mat img_S;
         Mat img_F;
         Mat img_F_euler;
-    }OriImg;
+    };
+    struct imgSandF OriImg;
 
     void ui_config();
 
@@ -74,6 +78,8 @@ private:
     Mat transtoEuler(Mat);
     void displaySpectrumAndPhaseAngle(Mat);
     Mat imageIFFT(Mat);
+    void displayProcessedImg(imgSandF*);
+    void h_uiMULf_uv(Mat, Mat, imgSandF*, int, int);
 
     /*
      * ILPF: Ideal Lowpass Filter
@@ -82,7 +88,7 @@ private:
      *
      *   - return: Mat, H(u,v)R(u,v) + jH(u,v)I(u,v)
      */
-    Mat ILPF(Mat, int);
+    void ILPF(imgSandF, imgSandF*, int, bool);
 
     /*
      * BLPF: Butterworth Lowpass Filter
@@ -92,7 +98,7 @@ private:
      *
      *   - return: Mat, H(u,v)R(u,v) + jH(u,v)I(u,v)
      */
-    Mat BLPF(Mat, int, int);
+    void BLPF(imgSandF, imgSandF*, int, int, bool);
 
     /*
      * GLPF: Gaussion Lowpass Filter
@@ -101,7 +107,7 @@ private:
      *
      *   - return: Mat, H(u,v)R(u,v) + jH(u,v)I(u,v)
      */
-    Mat GLPF(Mat, int);
+    void GLPF(imgSandF, imgSandF*, int, bool);
 
     /*
      * HOMOF: Homemorphic Filter
@@ -113,7 +119,7 @@ private:
      *
      *   - return: Mat, H(u,v)R1(u,v) + jH(u,v)I1(u,v)
      */
-    Mat HOMOF(Mat, float, float, float, int);
+    void HOMOF(imgSandF, imgSandF*, int, int, int, int);
 
     /*
      * createMotionBImage: to create a motion blurred image, B(u,v)
