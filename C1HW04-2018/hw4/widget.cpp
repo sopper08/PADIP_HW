@@ -23,13 +23,57 @@ Widget::Widget(QWidget *parent) :
     connect(ui->horizontalSlider_Func_Homo_RL , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_Homo_RL , SLOT(display(int)));
     connect(ui->horizontalSlider_Func_Homo_C  , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_Homo_C  , SLOT(display(int)));
     connect(ui->horizontalSlider_Func_Homo_D0 , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_Homo_D0 , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_CreMBImg_A , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_CreMBImg_A , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_CreMBImg_B , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_CreMBImg_B , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_RemMBImg_IF_A , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_RemMBImg_IF_A , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_RemMBImg_IF_B , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_RemMBImg_IF_B , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_RemMBImg_WF_A , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_RemMBImg_WF_A , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_RemMBImg_WF_B , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_RemMBImg_WF_B , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_RemMBImg_WF_K , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_RemMBImg_WF_K , SLOT(display(int)));
+    connect(ui->pushButton_ProImg_store, SIGNAL(clicked()), this, SLOT(storeProcessedImg()));
+    connect(ui->pushButton_IF, SIGNAL(clicked()), this, SLOT(oriIFFT()));
+    connect(ui->pushButton_ADDN, SIGNAL(clicked()), this, SLOT(addNoice()));
+}
+
+void Widget::oriIFFT(){
+    Mat img_F = OriImg.img_F.clone();
+    processedImg.img_F = img_F.clone();
+    Mat img;
+    idft(img_F,img,DFT_REAL_OUTPUT);
+    normalize(img,img,0,1,NORM_MINMAX,img.type());
+    img.convertTo(img, CV_8U, 255);
+    int oriCols = OriImg.img_S.cols;
+    int oriRows = OriImg.img_S.rows;
+    processedImg.img_S = Mat(img, Rect(0,0,oriCols,oriRows));
+    /* Spectrum and Phase Angle */
+    Mat img_F_euler = transtoEuler(img_F);
+    processedImg.img_F_euler = img_F_euler;
+    displayProcessedImg(&processedImg);
+}
+
+void Widget::addNoice(){
+    Mat img_S = Mat_<float>(OriImg.img_S);
+    int cols = img_S.cols;
+    int rows = img_S.rows;
+    Mat white_mat;
+    white_mat.create(img_S.size(), CV_32F);
+    randn(white_mat,0,2);
+//    imshow("123", white_mat);
+    img_S+=white_mat;
+    imshow("123", OriImg.img_S);
+
+}
+
+void Widget::storeProcessedImg(){
+    Mat img = processedImg.img_S;
+    imwrite("./processedImg/processedImg.jpg", img);
 }
 
 void Widget::execute(){
     int i = ui->tabWidget_Func->currentIndex();
     switch (i) {
         case 0:
-            cout << "level1: " << 0 << endl;
+//            cout << "level1: " << 0 << endl;
             break;
         /* LP */
         case 1:{
@@ -39,26 +83,23 @@ void Widget::execute(){
                 /* ILPF */
                 case 0:{
                     int d0 = ui->horizontalSlider_Func_LP_ID_D0->value();
-                    imgSandF img_ILPF;
-                    ILPF(OriImg, &img_ILPF, d0, true);
-                    displayProcessedImg(&img_ILPF);
+                    ILPF(OriImg, &processedImg, d0, true);
+                    displayProcessedImg(&processedImg);
                     break;
                 }
                 /* BLPF */
                 case 1:{
                     int d0 = ui->horizontalSlider_Func_LP_Bu_D0->value();
                     int n = ui->horizontalSlider_Func_LP_Bu_N->value();
-                    imgSandF img_BLPF;
-                    BLPF(OriImg, &img_BLPF, d0, n, true);
-                    displayProcessedImg(&img_BLPF);
+                    BLPF(OriImg, &processedImg, d0, n, true);
+                    displayProcessedImg(&processedImg);
                     break;
                 }
                 /* GLPF */
                 case 2:{
                     int d0 = ui->horizontalSlider_Func_LP_Ga_D0->value();
-                    imgSandF img_GLPF;
-                    GLPF(OriImg, &img_GLPF, d0, true);
-                    displayProcessedImg(&img_GLPF);
+                    GLPF(OriImg, &processedImg, d0, true);
+                    displayProcessedImg(&processedImg);
                     break;
                 }
                 default:
@@ -74,26 +115,23 @@ void Widget::execute(){
                 case 0:{
                     cout << "hjahah" << endl;
                     int d0 = ui->horizontalSlider_Func_HP_ID_D0->value();
-                    imgSandF img_ILPF;
-                    ILPF(OriImg, &img_ILPF, d0, false);
-                    displayProcessedImg(&img_ILPF);
+                    ILPF(OriImg, &processedImg, d0, false);
+                    displayProcessedImg(&processedImg);
                     break;
                 }
                 /* BHPF */
                 case 1:{
                     int d0 = ui->horizontalSlider_Func_HP_Bu_D0->value();
                     int n = ui->horizontalSlider_Func_HP_Bu_N->value();
-                    imgSandF img_BLPF;
-                    BLPF(OriImg, &img_BLPF, d0, n, false);
-                    displayProcessedImg(&img_BLPF);
+                    BLPF(OriImg, &processedImg, d0, n, false);
+                    displayProcessedImg(&processedImg);
                     break;
                 }
                 /* GHPF */
                 case 2:{
                     int d0 = ui->horizontalSlider_Func_HP_Ga_D0->value();
-                    imgSandF img_GLPF;
-                    GLPF(OriImg, &img_GLPF, d0, false);
-                    displayProcessedImg(&img_GLPF);
+                    GLPF(OriImg, &processedImg, d0, false);
+                    displayProcessedImg(&processedImg);
                     break;
                 }
                 default:
@@ -107,26 +145,36 @@ void Widget::execute(){
             int r_L = ui->horizontalSlider_Func_Homo_RL->value();
             int c   = ui->horizontalSlider_Func_Homo_C->value();
             int d0 = ui->horizontalSlider_Func_Homo_D0->value();
-            imgSandF g;
-            HOMOF(OriImg, &g, r_H, r_L, c, d0);
-            displayProcessedImg(&g);
+            HOMOF(OriImg, &processedImg, r_H, r_L, c, d0);
+            displayProcessedImg(&processedImg);
             break;
         }
         /* Motion Blurred */
         case 4:{
-
+            int a_100 = ui->horizontalSlider_Func_CreMBImg_A->value();
+            int b_100 = ui->horizontalSlider_Func_CreMBImg_B->value();
+            createMotionBImage(OriImg, &processedImg, a_100, b_100);
+            displayProcessedImg(&processedImg);
             break;
         }
         case 5:{
-            cout << "level1: " << 5 << endl;
-            int j = ui->tabWidget_Func_LP->currentIndex();
+            int j = ui->tabWidget_Func_RemMBImg->currentIndex();
             switch (j) {
-            case 0:
-                cout << "level2: " << 0 << endl;
+            case 0:{
+                int a_100 = ui->horizontalSlider_Func_RemMBImg_IF_A->value();
+                int b_100 = ui->horizontalSlider_Func_RemMBImg_IF_B->value();
+                inverseF(OriImg, &processedImg, a_100, b_100);
+                displayProcessedImg(&processedImg);
                 break;
-            case 1:
-                cout << "level2: " << 1 << endl;
+            }
+            case 1:{
+                int a_100 = ui->horizontalSlider_Func_RemMBImg_WF_A->value();
+                int b_100 = ui->horizontalSlider_Func_RemMBImg_WF_B->value();
+                int k_100 = ui->horizontalSlider_Func_RemMBImg_WF_K->value();
+                wienerF(OriImg, &processedImg, a_100, b_100, k_100);
+                displayProcessedImg(&processedImg);
                 break;
+            }
             default:
                 break;
             }
@@ -256,8 +304,109 @@ void Widget::HOMOF(imgSandF oriImg, imgSandF* g, int r_H, int r_L, int c, int d0
     g->img_S = Mat(imgs, Rect(0,0,oriCols,oriRows));
 }
 
-void Widget::createMotionBImage(imgSandF oriImg, imgSandF* g, float a, float b, float T){
+void Widget::createMotionBImage(imgSandF oriImg, imgSandF* g, int a_100, int b_100){
+    Mat img_F = oriImg.img_F.clone();
+    /* H(u,v) */
+    float a = float(a_100)/100;
+    float b = float(b_100)/100;
+    float t = 1;
+    Mat h_uv_plane[2] = {Mat::zeros(img_F.size(), CV_32F), Mat::zeros(img_F.size(), CV_32F)};
+    int cols = img_F.cols;
+    int rows = img_F.rows;
+    for(int i=0;i<rows;i++){
+        for(int j=0;j<cols;j++){
+            /* u:i-rows/2, v:j-cols/2 */
+            int u = i-rows/2;
+            int v = j-cols/2;
+            float uaADDub = M_PI*(u*a+v*b);
+            h_uv_plane[0].at<float>(i,j) = (uaADDub==0?1:(sin(uaADDub)/uaADDub)*t*cos(-uaADDub));
+            h_uv_plane[1].at<float>(i,j) = (uaADDub==0?1:(sin(uaADDub)/uaADDub)*t*sin(-uaADDub));
+        }
+    }
+    h_uv_plane[0] = shiftTheFPlane(h_uv_plane[0]);
+    h_uv_plane[1] = shiftTheFPlane(h_uv_plane[1]);
+    Mat h_uv;
+    merge(h_uv_plane,2,h_uv);
+    mulSpectrums(img_F,h_uv,img_F,0,false);
+    g->img_F = img_F.clone();
+    g->img_F_euler = transtoEuler(img_F);
+    idft(img_F,img_F,DFT_REAL_OUTPUT);
+    normalize(img_F,img_F,0,1,NORM_MINMAX,img_F.type());
+    img_F.convertTo(img_F, CV_8U, 255);
+    g->img_S = img_F;
+}
 
+void Widget::inverseF(imgSandF oriImg, imgSandF* g, int a_100, int b_100){
+    Mat img_F = oriImg.img_F.clone();
+    /* H(u,v) */
+    float a = float(a_100)/100;
+    float b = float(b_100)/100;
+    float t = 1;
+    Mat h_uv_plane[2] = {Mat::zeros(img_F.size(), CV_32F), Mat::zeros(img_F.size(), CV_32F)};
+    int cols = img_F.cols;
+    int rows = img_F.rows;
+    for(int i=0;i<rows;i++){
+        for(int j=0;j<cols;j++){
+            /* u:i-rows/2, v:j-cols/2 */
+            int u = i-rows/2;
+            int v = j-cols/2;
+            float uaADDub = M_PI*(u*a+v*b);
+            float a = (uaADDub==0?1:(sin(uaADDub)/uaADDub)*t*cos(-uaADDub));
+            float b = (uaADDub==0?1:(sin(uaADDub)/uaADDub)*t*sin(-uaADDub));
+            h_uv_plane[0].at<float>(i,j) = a/(a*a+b*b)*1000;
+            h_uv_plane[1].at<float>(i,j) = -b/(a*a+b*b)*1000;
+        }
+    }
+    Mat f_uv[2];
+    split(img_F,f_uv);
+    h_uv_plane[0] = shiftTheFPlane(h_uv_plane[0]);
+    h_uv_plane[1] = shiftTheFPlane(h_uv_plane[1]);
+    Mat h_uv;
+    merge(h_uv_plane,2,h_uv);
+    mulSpectrums(img_F,h_uv,img_F,0,false);
+    g->img_F = img_F.clone();
+    g->img_F_euler = transtoEuler(img_F);
+    idft(img_F,img_F,DFT_REAL_OUTPUT);
+    normalize(img_F,img_F,0,1,NORM_MINMAX,img_F.type());
+    img_F.convertTo(img_F, CV_8U, 255);
+    g->img_S = img_F;
+}
+
+void Widget::wienerF(imgSandF oriImg, imgSandF* g, int a_100, int b_100, int k_100){
+    Mat img_F = oriImg.img_F.clone();
+    /* H(u,v) */
+    float a = float(a_100)/100;
+    float b = float(b_100)/100;
+    float t = 1;
+    float k = float(k_100)/10000;
+    Mat h_uv_plane[2] = {Mat::zeros(img_F.size(), CV_32F), Mat::zeros(img_F.size(), CV_32F)};
+    int cols = img_F.cols;
+    int rows = img_F.rows;
+    for(int i=0;i<rows;i++){
+        for(int j=0;j<cols;j++){
+            /* u:i-rows/2, v:j-cols/2 */
+            int u = i-rows/2;
+            int v = j-cols/2;
+            float uaADDub = M_PI*(u*a+v*b);
+            float a = (uaADDub==0?1:(sin(uaADDub)/uaADDub)*t*cos(-uaADDub));
+            float b = (uaADDub==0?1:(sin(uaADDub)/uaADDub)*t*sin(-uaADDub));
+            h_uv_plane[0].at<float>(i,j) = a/(a*a+b*b+k)*1000;
+            h_uv_plane[1].at<float>(i,j) = -b/(a*a+b*b+k)*1000;
+        }
+    }
+    Mat f_uv[2];
+    split(img_F,f_uv);
+    h_uv_plane[0] = shiftTheFPlane(h_uv_plane[0]);
+    h_uv_plane[1] = shiftTheFPlane(h_uv_plane[1]);
+    Mat h_uv;
+    merge(h_uv_plane,2,h_uv);
+    mulSpectrums(img_F,h_uv,img_F,0,false);
+    g->img_F = img_F.clone();
+    g->img_F_euler = transtoEuler(img_F);
+    idft(img_F,img_F,DFT_REAL_OUTPUT);
+    normalize(img_F,img_F,0,1,NORM_MINMAX,img_F.type());
+    img_F.convertTo(img_F, CV_8U, 255);
+    g->img_S = img_F;
 }
 
 void Widget::ui_config(){

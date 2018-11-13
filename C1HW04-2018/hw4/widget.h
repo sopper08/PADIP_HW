@@ -7,6 +7,7 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <asmOpenCV.h>
+#include <cmath>
 
 using namespace std;
 using namespace cv;
@@ -30,6 +31,9 @@ private slots:
     void choose_folder();
     void displayOriIMG(int);
     void execute();
+    void storeProcessedImg();
+    void oriIFFT();
+    void addNoice();
 
 private:
     Ui::Widget *ui;
@@ -40,6 +44,7 @@ private:
         Mat img_F_euler;
     };
     struct imgSandF OriImg;
+    struct imgSandF processedImg;
 
     void ui_config();
 
@@ -122,15 +127,16 @@ private:
     void HOMOF(imgSandF, imgSandF*, int, int, int, int);
 
     /*
+     * ------------------------------------------------------------
      * createMotionBImage: to create a motion blurred image, B(u,v)
-     *   - Mat: F(u,v)
-     *   - int: a
-     *   - int: b
-     *   - int: T
-     *
-     *   - return: Mat, B(u,v)
+     * ------------------------------------------------------------
+     *   - imgSandF: f(x,y) and F(u,v)
+     *   - imgSandF*: g(x,y) and G(u,v)
+     *   - int: a*100
+     *   - int: b*100
+     * ------------------------------------------------------------
      */
-    void createMotionBImage(imgSandF, imgSandF*, float, float, float);
+    void createMotionBImage(imgSandF, imgSandF*, int, int);
 
     /*
      * inverseF: Inverse Filter, to remove motion blur
@@ -141,7 +147,7 @@ private:
      *
      *   - return: Mat, F_h(u,v)
      */
-    Mat inverseF(Mat, float, float, float);
+    void inverseF(imgSandF, imgSandF*, int, int);
 
     /*
      * wienerF: Wiener Filter, to remove motion blur
@@ -153,7 +159,9 @@ private:
      *
      *   - return: Mat, F_h(u,v)
      */
-    Mat wienerF(Mat, float, float, float, float);
+    void wienerF(imgSandF, imgSandF*, int, int, int);
+
+
 
 };
 
