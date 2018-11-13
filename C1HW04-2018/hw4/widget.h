@@ -130,7 +130,7 @@ private:
      *
      *   - return: Mat, B(u,v)
      */
-    Mat createMotionBImage(Mat, float, float, float);
+    void createMotionBImage(imgSandF, imgSandF*, float, float, float);
 
     /*
      * inverseF: Inverse Filter, to remove motion blur

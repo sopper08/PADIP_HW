@@ -8,6 +8,7 @@ Widget::Widget(QWidget *parent) :
     ui->setupUi(this);
     ui_config();
     connect(ui->pushButton_ChooseFolder,SIGNAL(clicked()),this,SLOT(choose_folder()));
+//    connect(ui->pushButton_Clear,SIGNAL(clicked()),ui->listWidget_ImageList,SLOT(clear()));
     connect(ui->listWidget_ImageList,SIGNAL(currentRowChanged(int)),this,SLOT(displayOriIMG(int)));
     connect(ui->pushButton_Execute,SIGNAL(clicked()),this,SLOT(execute()));
     connect(ui->horizontalSlider_Func_LP_ID_D0, SIGNAL(valueChanged(int)), ui->lcdNumber_Func_LP_ID_D0, SLOT(display(int)));
@@ -37,7 +38,6 @@ void Widget::execute(){
             switch (j) {
                 /* ILPF */
                 case 0:{
-//                    cout << "level2: " << 0 << endl;
                     int d0 = ui->horizontalSlider_Func_LP_ID_D0->value();
                     imgSandF img_ILPF;
                     ILPF(OriImg, &img_ILPF, d0, true);
@@ -101,6 +101,7 @@ void Widget::execute(){
                 }
             break;
         }
+        /* HOMO */
         case 3:{
             int r_H = ui->horizontalSlider_Func_Homo_RH->value();
             int r_L = ui->horizontalSlider_Func_Homo_RL->value();
@@ -111,8 +112,9 @@ void Widget::execute(){
             displayProcessedImg(&g);
             break;
         }
+        /* Motion Blurred */
         case 4:{
-            cout << "level1: " << 4 << endl;
+
             break;
         }
         case 5:{
@@ -218,13 +220,14 @@ void Widget::GLPF(imgSandF oriImg, imgSandF* g, int d0, bool lpORhp){
 }
 
 void Widget::HOMOF(imgSandF oriImg, imgSandF* g, int r_H, int r_L, int c, int d0){
+    cout << r_H << " "<< r_L << " "<< c << " " << d0 << endl;
     double r_L_100 = double(r_L)/100;
-    /* ln(f(x,y)) */
+    /* ln(1+f(x,y)) */
     Mat img_S = oriImg.img_S.clone();
     img_S.convertTo(img_S, CV_32F);
     img_S += Scalar::all(1);
     log(img_S, img_S);
-    /* F{ln(f(x,y))} */
+    /* M(u,v) = F{ln(1+f(x,y))} */
     Mat img_F = imageFFT(img_S);
     /* H(u,v) */
     Mat h_uv = Mat::zeros(img_F.size(), CV_32F);
@@ -232,19 +235,29 @@ void Widget::HOMOF(imgSandF oriImg, imgSandF* g, int r_H, int r_L, int c, int d0
     int rows = img_F.rows;
     for(int i=0;i<rows;i++){
         for(int j=0;j<cols;j++){
-            float d_uv = sqrt(pow(i-cols/2,2)+pow(j-rows/2,2));
+            float d_uv = sqrt(pow(j-cols/2,2)+pow(i-rows/2,2));
             h_uv.at<float>(i,j) = (r_H-r_L_100)*(1-exp(-c*(pow(d_uv,2)/pow(d0,2))))+r_L_100;
         }
     }
-//    imshow("2", h_uv);
     h_uv = shiftTheFPlane(h_uv);
     int oriCols = oriImg.img_S.cols;
     int oriRows = oriImg.img_S.rows;
-
+    /* J(u,v) = H(u,v)M(u,v) */
     h_uiMULf_uv(h_uv, img_F, g, oriCols, oriRows);
-    Mat imgs = g->img_S;
-    imgs.convertTo(imgs, CV_32F);
+    /* F^-1{J(u,v)} = j(x,y) */
+    /* g(x,y) = exp(j(x,y))-1 */
+    Mat imgs;
+    Mat imgf = g->img_F.clone();
+    idft(imgf,imgs,DFT_REAL_OUTPUT);
+    normalize(imgs,imgs,0,1,NORM_MINMAX,imgs.type());
     exp(imgs,imgs);
+    normalize(imgs,imgs,0,1,NORM_MINMAX,imgs.type());
+    imgs.convertTo(imgs, CV_8U, 255);
+    g->img_S = Mat(imgs, Rect(0,0,oriCols,oriRows));
+}
+
+void Widget::createMotionBImage(imgSandF oriImg, imgSandF* g, float a, float b, float T){
+
 }
 
 void Widget::ui_config(){
@@ -253,10 +266,6 @@ void Widget::ui_config(){
 
 void Widget::choose_folder(){
     img_vec.clear();
-    while(ui->listWidget_ImageList->count()!=0){
-        cout << ui->listWidget_ImageList->count() << endl;
-        ui->listWidget_ImageList->takeItem(0);
-    }
     QString folderPath = QFileDialog::getExistingDirectory(NULL,tr("選擇資料夾"),"./",QFileDialog::ShowDirsOnly);
     dispalyListOfImage(folderPath);
 }
@@ -270,7 +279,6 @@ void Widget::displayOriIMG(int d){
     Mat img_F_euler[2];
     split(OriImg.img_F_euler,img_F_euler);
     displayIMG(ui->label_OriImgF_S, Mat2QImage(shiftTheFPlane(img_F_euler[0])));
-
     displayIMG(ui->label_OriImgF_PA, Mat2QImage(shiftTheFPlane(img_F_euler[1])));
 }
 
@@ -324,7 +332,7 @@ Mat Widget::shiftTheFPlane(Mat img_F_euler){
     int cols = img_F_euler.cols;
     int rows = img_F_euler.rows;
     Mat result;
-    result.create(2*cols,2*rows,img_F_euler.type());
+    result.create(2*rows, 2*cols, img_F_euler.type());
     Mat q0(result, Rect(0,0,cols,rows));
     Mat q1(result, Rect(cols,0,cols,rows));
     Mat q2(result, Rect(0,rows,cols,rows));
