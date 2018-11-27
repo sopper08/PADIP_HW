@@ -211,7 +211,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_ProImgF_S">
      <attribute name="title">
@@ -273,7 +273,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -573,7 +573,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_Func_HP_ID">
        <attribute name="title">
@@ -727,6 +727,9 @@
          </property>
          <property name="maximum">
           <number>500</number>
+         </property>
+         <property name="pageStep">
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -1175,7 +1178,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_Func_RemMBImg_IF">
        <attribute name="title">
@@ -1423,7 +1426,7 @@
           </rect>
          </property>
          <property name="maximum">
-          <number>100</number>
+          <number>999</number>
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>

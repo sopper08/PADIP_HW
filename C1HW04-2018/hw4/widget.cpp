@@ -7,32 +7,31 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     ui_config();
-    connect(ui->pushButton_ChooseFolder,SIGNAL(clicked()),this,SLOT(choose_folder()));
-//    connect(ui->pushButton_Clear,SIGNAL(clicked()),ui->listWidget_ImageList,SLOT(clear()));
-    connect(ui->listWidget_ImageList,SIGNAL(currentRowChanged(int)),this,SLOT(displayOriIMG(int)));
-    connect(ui->pushButton_Execute,SIGNAL(clicked()),this,SLOT(execute()));
-    connect(ui->horizontalSlider_Func_LP_ID_D0, SIGNAL(valueChanged(int)), ui->lcdNumber_Func_LP_ID_D0, SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_LP_Bu_D0, SIGNAL(valueChanged(int)), ui->lcdNumber_Func_LP_Bu_D0, SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_LP_Bu_N , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_LP_Bu_N , SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_LP_Ga_D0, SIGNAL(valueChanged(int)), ui->lcdNumber_Func_LP_Ga_D0, SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_HP_ID_D0, SIGNAL(valueChanged(int)), ui->lcdNumber_Func_HP_ID_D0, SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_HP_Bu_D0, SIGNAL(valueChanged(int)), ui->lcdNumber_Func_HP_Bu_D0, SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_HP_Bu_N , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_HP_Bu_N , SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_HP_Ga_D0, SIGNAL(valueChanged(int)), ui->lcdNumber_Func_HP_Ga_D0, SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_Homo_RH , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_Homo_RH , SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_Homo_RL , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_Homo_RL , SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_Homo_C  , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_Homo_C  , SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_Homo_D0 , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_Homo_D0 , SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_CreMBImg_A , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_CreMBImg_A , SLOT(display(int)));
-    connect(ui->horizontalSlider_Func_CreMBImg_B , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_CreMBImg_B , SLOT(display(int)));
+    connect(ui->pushButton_ChooseFolder             , SIGNAL(clicked())        , this                             , SLOT(choose_folder()));
+    connect(ui->pushButton_Execute                  , SIGNAL(clicked())        , this                             , SLOT(execute()));
+    connect(ui->horizontalSlider_Func_LP_ID_D0      , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_LP_ID_D0      , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_LP_Bu_D0      , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_LP_Bu_D0      , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_LP_Bu_N       , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_LP_Bu_N       , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_LP_Ga_D0      , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_LP_Ga_D0      , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_HP_ID_D0      , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_HP_ID_D0      , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_HP_Bu_D0      , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_HP_Bu_D0      , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_HP_Bu_N       , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_HP_Bu_N       , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_HP_Ga_D0      , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_HP_Ga_D0      , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_Homo_RH       , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_Homo_RH       , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_Homo_RL       , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_Homo_RL       , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_Homo_C        , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_Homo_C        , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_Homo_D0       , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_Homo_D0       , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_CreMBImg_A    , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_CreMBImg_A    , SLOT(display(int)));
+    connect(ui->horizontalSlider_Func_CreMBImg_B    , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_CreMBImg_B    , SLOT(display(int)));
     connect(ui->horizontalSlider_Func_RemMBImg_IF_A , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_RemMBImg_IF_A , SLOT(display(int)));
     connect(ui->horizontalSlider_Func_RemMBImg_IF_B , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_RemMBImg_IF_B , SLOT(display(int)));
     connect(ui->horizontalSlider_Func_RemMBImg_WF_A , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_RemMBImg_WF_A , SLOT(display(int)));
     connect(ui->horizontalSlider_Func_RemMBImg_WF_B , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_RemMBImg_WF_B , SLOT(display(int)));
     connect(ui->horizontalSlider_Func_RemMBImg_WF_K , SIGNAL(valueChanged(int)), ui->lcdNumber_Func_RemMBImg_WF_K , SLOT(display(int)));
-    connect(ui->pushButton_ProImg_store, SIGNAL(clicked()), this, SLOT(storeProcessedImg()));
-    connect(ui->pushButton_IF, SIGNAL(clicked()), this, SLOT(oriIFFT()));
-    connect(ui->pushButton_ADDN, SIGNAL(clicked()), this, SLOT(addNoice()));
+    connect(ui->pushButton_ProImg_store             , SIGNAL(clicked())        , this                             , SLOT(storeProcessedImg()));
+    connect(ui->pushButton_IF                       , SIGNAL(clicked())        , this                             , SLOT(oriIFFT()));
+    connect(ui->pushButton_ADDN                     , SIGNAL(clicked())        , this                             , SLOT(addNoice()));
+    connect(ui->listWidget_ImageList                , SIGNAL(currentRowChanged(int)),this                         , SLOT(displayOriIMG(int)));
 }
 
 void Widget::oriIFFT(){
@@ -52,28 +51,92 @@ void Widget::oriIFFT(){
 }
 
 void Widget::addNoice(){
-    Mat img_S = Mat_<float>(OriImg.img_S);
+    /* Bulid the gaussian noise */
+    Mat img_S = OriImg.img_S;
     int cols = img_S.cols;
     int rows = img_S.rows;
-    Mat white_mat;
-    white_mat.create(img_S.size(), CV_32F);
-    randn(white_mat,0,2);
-//    imshow("123", white_mat);
-    img_S+=white_mat;
-    imshow("123", OriImg.img_S);
+    int colsMULrows = cols*rows;
+    vector<int> whiteN_histogram;
+    /* r = 0 */
+    int r = 0;
+    int q0 = colsMULrows/(sqrt(2*M_PI)*20)+0.5;
+    q0 = q0%2?(q0+1):q0;
+    whiteN_histogram.push_back(q0);
+    int check = colsMULrows-q0;
+    while(check>0){
+        r++;
+        double pr = 1/(sqrt(2*M_PI)*20)*exp(-pow(r,2)/800);
+        int qr = int(double(colsMULrows)*pr+0.5);
+        qr = qr==0?1:qr;
+        qr = (2*qr)<check?qr:(check/2);
+        whiteN_histogram.push_back(qr);
+        check = check - 2*qr;
+    }
+    reverse(whiteN_histogram.begin(),whiteN_histogram.end());
+    /* Trans to Pixel */
+    vector<int> whiteN_toPixel;
+    int pixel = 0;
+    while(!whiteN_histogram.empty()){
+//        cout << pixel << endl;
+        int num = whiteN_histogram.back();
+        whiteN_histogram.pop_back();
+        if(pixel==0){
+            vector<int> temp(num,pixel);
+            whiteN_toPixel.insert(whiteN_toPixel.end(),temp.begin(),temp.end());
+            pixel++;
+        }else{
+            vector<int> temp(num,pixel);
+            vector<int> temp1(num,-pixel);
+            whiteN_toPixel.insert(whiteN_toPixel.end(),temp.begin(),temp.end());
+            whiteN_toPixel.insert(whiteN_toPixel.end(),temp1.begin(),temp1.end());
+            pixel++;
+        }
+    }
+    random_shuffle(whiteN_toPixel.begin(), whiteN_toPixel.end());
+    Mat pixel_imgS = Mat_<float>(img_S);
+    normalize(pixel_imgS,pixel_imgS,0,255,NORM_MINMAX,pixel_imgS.type());
 
+    for(int i=0;i<rows;i++){
+        for(int j=0;j<cols;j++){
+            int noise = whiteN_toPixel.back();
+            whiteN_toPixel.pop_back();
+            float setPixel = pixel_imgS.at<float>(i,j) + noise;
+            setPixel = setPixel>255?255:setPixel;
+            setPixel = setPixel<0?0:setPixel;
+            pixel_imgS.at<float>(i,j) = setPixel;
+        }
+    }
+    pixel_imgS.convertTo(pixel_imgS,CV_8U);
+    processedImg.img_S = pixel_imgS.clone();
+    displayIMG(ui->label_ProImg,Mat2QImage(processedImg.img_S));
 }
 
 void Widget::storeProcessedImg(){
-    Mat img = processedImg.img_S;
-    imwrite("./processedImg/processedImg.jpg", img);
+    if(!processedImg.img_S.empty()){
+        string s = "./processedImg/processedImg_S_" + to_string(storeI) + ".jpg";
+        imwrite(s, processedImg.img_S);
+    }
+//    if(!processedImg.img_F.empty()){
+//        string s = "./processedImg/processedImg_F_" + to_string(storeI) + ".jpg";
+//        imwrite(s, processedImg.img_F);
+//    }
+    if(!processedImg.img_F_euler.empty()){
+        Mat plane[2];
+        split(processedImg.img_F_euler, plane);
+        plane[0] = shiftTheFPlane(plane[0]);
+        plane[1] = shiftTheFPlane(plane[1]);
+        string s = "./processedImg/processedImg_F_euler_spe_" + to_string(storeI) + ".jpg";
+        imwrite(s, plane[0]);
+        s = "./processedImg/processedImg_F_euler_PA_" + to_string(storeI) + ".jpg";
+        imwrite(s, plane[1]);
+    }
+    storeI++;
 }
 
 void Widget::execute(){
     int i = ui->tabWidget_Func->currentIndex();
     switch (i) {
         case 0:
-//            cout << "level1: " << 0 << endl;
             break;
         /* LP */
         case 1:{
@@ -421,7 +484,7 @@ void Widget::choose_folder(){
 
 void Widget::displayOriIMG(int d){
     OriImg.img_S = imread(img_vec[d].path.toStdString(), IMREAD_GRAYSCALE);
-    QImage oriImg_QIMG = cvMatToQImage(OriImg.img_S);
+    QImage oriImg_QIMG = Mat2QImage(OriImg.img_S);
     displayIMG(ui->label_OriImg, oriImg_QIMG);
     OriImg.img_F = imageFFT(OriImg.img_S);
     OriImg.img_F_euler = transtoEuler(OriImg.img_F);

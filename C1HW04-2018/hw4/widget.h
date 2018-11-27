@@ -6,12 +6,10 @@
 #include <QLabel>
 #include <opencv2/opencv.hpp>
 #include <iostream>
-#include <asmOpenCV.h>
 #include <cmath>
 
 using namespace std;
 using namespace cv;
-using namespace ASM;
 
 namespace Ui {
 class Widget;
@@ -23,8 +21,6 @@ class Widget : public QWidget
 
 public:
     explicit Widget(QWidget *parent = 0);
-
-
     ~Widget();
 
 private slots:
@@ -37,7 +33,7 @@ private slots:
 
 private:
     Ui::Widget *ui;
-
+    int storeI = 0;
     struct imgSandF{
         Mat img_S;
         Mat img_F;
