@@ -1,20 +1,1343 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Widget</class>
- <widget class="QWidget" name="Widget" >
-  <property name="geometry" >
+ <widget class="QWidget" name="Widget">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>801</width>
+    <height>951</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Widget</string>
   </property>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>10</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>close</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Clear">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>20</y>
+     <width>101</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clear</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidget_ImageList">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>331</width>
+     <height>380</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_ChooseFolder">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>220</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Choose your image folder.</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_ImageList">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>220</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Image list:</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_OriImg">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>30</y>
+     <width>380</width>
+     <height>430</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Original Image</string>
+   </property>
+   <widget class="QTabWidget" name="tabWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>361</width>
+      <height>391</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab_OriImg">
+     <attribute name="title">
+      <string>ori IMG</string>
+     </attribute>
+     <widget class="QLabel" name="label_OriImg">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>5</y>
+        <width>350</width>
+        <height>350</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_RGB">
+     <attribute name="title">
+      <string>RGB</string>
+     </attribute>
+     <widget class="QTabWidget" name="tabWidget_RGB">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>340</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_RGB_R">
+       <attribute name="title">
+        <string>R</string>
+       </attribute>
+       <widget class="QLabel" name="label_RGB_R">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_RGB_G">
+       <attribute name="title">
+        <string>G</string>
+       </attribute>
+       <widget class="QLabel" name="label_RGB_G">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_RGB_B">
+       <attribute name="title">
+        <string>B</string>
+       </attribute>
+       <widget class="QLabel" name="label_RGB_B">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_CMY">
+     <attribute name="title">
+      <string>CMY</string>
+     </attribute>
+     <widget class="QTabWidget" name="tabWidget_CMY">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>340</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_CMY_C">
+       <attribute name="title">
+        <string>C</string>
+       </attribute>
+       <widget class="QLabel" name="label_CMY_C">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_CMY_M">
+       <attribute name="title">
+        <string>M</string>
+       </attribute>
+       <widget class="QLabel" name="label_CMY_M">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_CMY_Y">
+       <attribute name="title">
+        <string>Y</string>
+       </attribute>
+       <widget class="QLabel" name="label_CMY_Y">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_HSI">
+     <attribute name="title">
+      <string>HSI</string>
+     </attribute>
+     <widget class="QTabWidget" name="tabWidget_HSI">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>340</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_HSI_H">
+       <attribute name="title">
+        <string>H</string>
+       </attribute>
+       <widget class="QLabel" name="label_HSI_H">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_HSI_S">
+       <attribute name="title">
+        <string>S</string>
+       </attribute>
+       <widget class="QLabel" name="label_HSI_S">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_HSI_I">
+       <attribute name="title">
+        <string>I</string>
+       </attribute>
+       <widget class="QLabel" name="label_HSI_I">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_XYZ">
+     <attribute name="title">
+      <string>XYZ</string>
+     </attribute>
+     <widget class="QTabWidget" name="tabWidget_XYZ">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>340</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_XYZ_x">
+       <attribute name="title">
+        <string>x</string>
+       </attribute>
+       <widget class="QLabel" name="label_XYZ_x">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_XYZ_y">
+       <attribute name="title">
+        <string>y</string>
+       </attribute>
+       <widget class="QLabel" name="label_XYZ_y">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_XYZ_z">
+       <attribute name="title">
+        <string>z</string>
+       </attribute>
+       <widget class="QLabel" name="label_XYZ_z">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_Lab">
+     <attribute name="title">
+      <string>L*a*b*</string>
+     </attribute>
+     <widget class="QTabWidget" name="tabWidget_Lab">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>340</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_Lab_L">
+       <attribute name="title">
+        <string>L*</string>
+       </attribute>
+       <widget class="QLabel" name="label_Lab_L">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_Lab_A">
+       <attribute name="title">
+        <string>a*</string>
+       </attribute>
+       <widget class="QLabel" name="label_Lab_A">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_Lab_B">
+       <attribute name="title">
+        <string>b*</string>
+       </attribute>
+       <widget class="QLabel" name="label_Lab_B">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_YUV">
+     <attribute name="title">
+      <string>YUV</string>
+     </attribute>
+     <widget class="QTabWidget" name="tabWidget_YUV">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>340</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_YUV_Y">
+       <attribute name="title">
+        <string>Y</string>
+       </attribute>
+       <widget class="QLabel" name="label_YUV_Y">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_YUV_U">
+       <attribute name="title">
+        <string>U</string>
+       </attribute>
+       <widget class="QLabel" name="label_YUV_U">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_YUV_V">
+       <attribute name="title">
+        <string>V</string>
+       </attribute>
+       <widget class="QLabel" name="label_YUV_V">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>5</y>
+          <width>300</width>
+          <height>300</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_ProImg">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>500</y>
+     <width>380</width>
+     <height>430</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Processed Image</string>
+   </property>
+   <widget class="QLabel" name="label_ProImg">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>80</y>
+      <width>320</width>
+      <height>320</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget_func">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>520</y>
+     <width>331</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Pseudo-color</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>9</y>
+       <width>311</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Color list:</string>
+     </property>
+     <widget class="QLabel" name="label_c1">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>45</y>
+        <width>50</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_c2">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>45</y>
+        <width>50</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_c4">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>45</y>
+        <width>50</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_c3">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>45</y>
+        <width>50</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_c5">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>45</y>
+        <width>50</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_c6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>115</y>
+        <width>50</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_c7">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>115</y>
+        <width>50</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_c9">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>115</y>
+        <width>50</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_c10">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>115</y>
+        <width>50</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_c8">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>115</y>
+        <width>50</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>50</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>#FF0000</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>30</y>
+        <width>50</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>#FF5511</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>30</y>
+        <width>50</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>#FFBB00</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>30</y>
+        <width>50</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>#BBFF00</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>30</y>
+        <width>50</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>#00FF00</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>100</y>
+        <width>50</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>#CC00FF</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>100</y>
+        <width>50</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>#00BBFF</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>50</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>#00FFCC</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>100</y>
+        <width>50</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>#7700FF</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_20">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>100</y>
+        <width>50</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>#0000FF</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_ColorBar">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>180</y>
+       <width>311</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>ColorBar</string>
+     </property>
+     <widget class="QComboBox" name="comboBox_start">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>91</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>#FF0000</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#FF5511</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#FFBB00</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#BBFF00</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#00FF00</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#00FFCC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#00BBFF</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#0000FF</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#7700FF</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#CC00FF</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_start">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>91</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Start:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_end">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>30</y>
+        <width>91</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>End:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_end">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>50</y>
+        <width>91</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>#FF0000</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#FF5511</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#FFBB00</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#BBFF00</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#00FF00</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#00FFCC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#00BBFF</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#0000FF</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#7700FF</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#CC00FF</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_colorbar">
+      <property name="geometry">
+       <rect>
+        <x>25</x>
+        <y>86</y>
+        <width>256</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="pushButton_pseudoColor_run">
+     <property name="geometry">
+      <rect>
+       <x>8</x>
+       <y>344</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>RUN</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_ColorSeg">
+    <attribute name="title">
+     <string>Color Segmentation</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_ColorSeg_planes">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>291</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Planes</string>
+     </property>
+     <widget class="QRadioButton" name="radioButton_ColorSeg_planes_hsi">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>40</y>
+        <width>60</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>HSI</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_ColorSeg_planes_RGB">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>60</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>RGB</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_ColorSeg_planes_lab">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>40</y>
+        <width>70</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>L*a*b*</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_ColorSeg_k">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>291</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>K</string>
+     </property>
+     <widget class="QSlider" name="horizontalSlider_ColorSeg_k">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>271</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>2</number>
+      </property>
+      <property name="maximum">
+       <number>8</number>
+      </property>
+      <property name="pageStep">
+       <number>1</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLCDNumber" name="lcdNumber">
+      <property name="geometry">
+       <rect>
+        <x>253</x>
+        <y>50</y>
+        <width>31</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="digitCount">
+       <number>1</number>
+      </property>
+      <property name="value" stdset="0">
+       <double>2.000000000000000</double>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="pushButton_ColorSeg">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>224</y>
+       <width>281</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>run</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_OriImg_store">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>10</y>
+     <width>40</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../../C1HW04-2018/img/storage.png</normaloff>../../C1HW04-2018/img/storage.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>50</width>
+     <height>50</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_ProImg_store">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>480</y>
+     <width>40</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../../C1HW04-2018/img/storage.png</normaloff>../../C1HW04-2018/img/storage.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>50</width>
+     <height>50</height>
+    </size>
+   </property>
+  </widget>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>
