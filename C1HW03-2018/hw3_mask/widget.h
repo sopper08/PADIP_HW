@@ -43,15 +43,15 @@ private:
     void displayIMG(QLabel*,int);
     void returnMsg(string);
     int checkTheFunc();
-    void edgeDetection();
+    void edgeDetection(int t);
+    void sobel();
     void boxKernal(int);
     void gaussianKernal(int);
     void customKernal(int);
-    QImage linearKernalC(vector<vector<double>>,int);
+    QImage linearKernalC(vector<vector<double>>,int,bool);
     void nonlinearKernalC(int,int);
 //    int _sizeOfKernal=3;
     QImage* addBorder(QImage*, int);
-    void displaywh(QImage*);
     void ui_config();
 };
 

@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-10-23T16:11:40
+# Project created by QtCreator 2018-12-09T20:53:42
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = hw3_part3
+TARGET = hw6
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -32,3 +32,8 @@ HEADERS += \
 
 FORMS += \
         widget.ui
+
+LIBS += /usr/local/lib/libopencv_highgui.so \
+        /usr/local/lib/libopencv_core.so    \
+        /usr/local/lib/libopencv_imgproc.so \
+        /usr/local/lib/libopencv_imgcodecs.so.3.1

@@ -15,6 +15,7 @@ Widget::Widget(QWidget *parent) :
     connect(ui->horizontalSlider_MaskSize,SIGNAL(valueChanged(int)),ui->lcdNumber,SLOT(display(int)));
     connect(ui->horizontalSlider_MaskSize,SIGNAL(valueChanged(int)),this,SLOT(setRCCount(int)));
     connect(ui->pushButton_Run,SIGNAL(clicked()),this,SLOT(run()));
+    connect(ui->horizontalSlider,SIGNAL(valueChanged(int)),ui->lcdNumber_2,SLOT(display(int)));
 }
 
 void Widget::ui_config(){
@@ -48,12 +49,6 @@ void Widget::ui_config(){
 void Widget::run(){
     checkTheFunc();
 //    ui->label->setText(0);
-}
-
-/* Display the width and height of img */
-void Widget::displaywh(QImage* img){
-    int width = img->width();
-    int height = img->height();
 }
 
 /* Choose the function */
@@ -101,11 +96,227 @@ int Widget::checkTheFunc(){
             break;
         }
         case 3:{
-            edgeDetection();
-            return 0;
-            break;
+            if(ui->radioButton->isChecked()){
+                int t = ui->horizontalSlider->value();
+                edgeDetection(t);
+                return 0;
+                break;
+            }
+            if(ui->radioButton_2->isChecked()){
+                sobel();
+                return 0;
+                break;
+            }
+
+
+
         }
     }
+}
+
+/* -- Edge detection -- */
+/* Sobel */
+void Widget::sobel(){
+    clock_t start, end;
+    int diff_time;
+    start = clock();
+
+    int oriWidth = oriImg->width();
+    int oriHeight = oriImg->height();
+    int mask1_data[3][3] = {
+        { -1, 0, 1},
+        { -2, 0, 2},
+        { -1, 0, 1}
+    };
+    vector<vector<double>> mask1;
+    for(int i=0;i<3;i++){
+        vector<double> row;
+        for(int j=0;j<3;j++){
+            row.push_back(mask1_data[i][j]);
+        }
+        mask1.push_back(row);
+    }
+    int mask2_data[3][3] = {
+        { -1,  -2,  -1},
+        { 0,  0,  0},
+        {1, 2, 1}
+    };
+    vector<vector<double>> mask2;
+    for(int i=0;i<3;i++){
+        vector<double> row;
+        for(int j=0;j<3;j++){
+            row.push_back(mask2_data[i][j]);
+        }
+        mask2.push_back(row);
+    }
+    cout.setf(ios::fixed,ios::floatfield);
+    vector<vector<double>> img;
+    vector<double> border(oriWidth+2,0);
+    img.push_back(border);
+    for(int i=0;i<=oriHeight+1;i++){
+        vector<double> row;
+        row.push_back(0);
+        for(int j=0;j<=oriWidth+1;j++){
+            if(i>0&&i<oriHeight+1&&j>0&&j<oriWidth+1){
+//                cout << qRed(oriImg->pixel(j-1,i-1)) << " ";
+                double setPixel = double(qRed(oriImg->pixel(j-1,i-1)));
+                row.push_back(setPixel);
+            }
+        }
+        row.push_back(0);
+        cout << row.size() << endl;
+        if(i>0&&i<oriHeight+1) img.push_back(row);
+    }
+    img.push_back(border);
+
+    vector<vector<double>> g1;
+    for(int i=2;i<oriHeight+2;i++){
+        vector<double> row;
+        for(int j=2;j<oriWidth+2;j++){
+            double setPixel = 0;
+            for(int k=2;k>=0;k--){
+                for(int l=2;l>=0;l--){
+//                    cout << i << " " << j << " " << k << " " << l << endl;
+                    setPixel += mask1[k][l]*img[i-2+k][j-2+l];
+                }
+            }
+            row.push_back(setPixel);
+        }
+        g1.push_back(row);
+    }
+
+    vector<vector<double>> g2;
+    for(int i=2;i<oriHeight+2;i++){
+        vector<double> row;
+        for(int j=2;j<oriWidth+2;j++){
+            double setPixel = 0;
+            for(int k=2;k>=0;k--){
+                for(int l=2;l>=0;l--){
+//                    cout << i-2+k << " " << j-2+l << " " << k << " " << l << " ";
+                    setPixel += mask2[k][l]*img[i-2+k][j-2+l];
+//                    cout << mask2[k][l] << " " << img[i-2+k][j-2+l] << setPixel << endl;
+                }
+            }
+            row.push_back(setPixel);
+//            cout << endl;
+        }
+        g2.push_back(row);
+    }
+    vector<vector<double>> g3;
+    for(int i=0;i<oriHeight;i++){
+        vector<double> row;
+        for(int j=0;j<oriWidth;j++){
+            double l = pow(g1[i][j],2);
+            double r = pow(g2[i][j],2);
+            double d = sqrt(l+r);
+            if(d>255) d=255;
+            if(d<0) d=0;
+            row.push_back(d);
+        }
+        g3.push_back(row);
+        double d = 100*i/oriHeight+1;
+        ui->progressBar->setValue(int(d));
+    }
+
+    QImage* resultIMG = new QImage(oriWidth,oriHeight,QImage::Format_RGB32);
+    for(int i=0;i<oriHeight;i++){
+        for(int j=0;j<oriWidth;j++){
+            resultIMG->setPixel(j,i,qRgb(int(g3[i][j]),int(g3[i][j]),int(g3[i][j])));
+        }
+    }
+    ui->label_aft->setPixmap(QPixmap::fromImage(resultIMG->scaled(360,360,Qt::KeepAspectRatio)));
+
+    end = clock();
+    diff_time = (end-start)/1000;
+    ui->label->setText(QString::number(diff_time));
+}
+
+/* Edge detection */
+void Widget::edgeDetection(int t){
+    clock_t start, end;
+    int diff_time;
+    start = clock();
+
+    int oriWidth = oriImg->width();
+    int oriHeight = oriImg->height();
+    int r = 5;
+    int mask_data[5][5] = {
+        { 0,  0, -1,  0,  0},
+        { 0, -1, -2, -1,  0},
+        {-1, -2, 16, -1, -2},
+        { 0, -1, -2, -1,  0},
+        { 0,  0, -1,  0,  0}
+    };
+    vector<vector<double>> mask;
+    for(int i=0;i<5;i++){
+        vector<double> row;
+        for(int j=0;j<5;j++){
+            row.push_back(mask_data[i][j]);
+        }
+        mask.push_back(row);
+    }
+
+    QImage* withBorderIMG = addBorder(oriImg, r);
+
+    vector<vector<int>> img;
+    vector<int> border(oriWidth+2,0);
+    img.push_back(border);
+    for(int i=0;i<oriHeight+r;i++){
+        vector<int> row;
+        row.push_back(0);
+        for(int j=0;j<oriWidth+r;j++){
+            double setPixel = 0;
+            for(int k=r-1;k>=0;k--){
+                for(int l=r-1;l>=0;l--){
+                    setPixel += mask[k][l]*double(qRed(withBorderIMG->pixel(j+k,i+k)));
+                }
+            }
+            if(j>3&&j<oriWidth+4) row.push_back(setPixel);
+        }
+        row.push_back(0);
+        if(i>3&&i<oriHeight+4) img.push_back(row);
+    }
+    img.push_back(border);
+
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            cout << img[oriHeight+1-i][oriWidth+1-j] << " ";
+        }
+        cout << endl;
+    }
+    QImage* storeResultIMG = new QImage(oriWidth,oriHeight,QImage::Format_RGB32);
+    for(int i=0;i<oriHeight;i++){
+        for(int j=0;j<oriWidth;j++){
+            vector<int> v;
+            for(int k=-1;k<=1;k++){
+                for(int l=-1;l<=1;l++){
+                    int x = img[i+1+k][j+1+l];
+                    v.push_back(x);
+                }
+            }
+            int check = 0;
+            int setPix = 0;
+            cout << endl;
+            for(int m=0;m<4;m++){
+                int pl = v[m];
+                int pu = v[8-m];
+                if(pl*pu<0&&abs(pl-pu)>t) check++;
+                if(check>=2){
+                    setPix=255;
+                    break;
+                }
+            }
+
+            storeResultIMG->setPixel(j,i,qRgb(setPix, setPix, setPix));
+        }
+        double d = 100*i/oriHeight+1;
+        ui->progressBar->setValue(int(d));
+    }
+    ui->label_aft->setPixmap(QPixmap::fromImage(storeResultIMG->scaled(360,360,Qt::KeepAspectRatio)));
+
+    end = clock();
+    diff_time = (end-start)/1000;
+    ui->label->setText(QString::number(diff_time));
 }
 
 /* ----- Non-linear ----- */
@@ -124,7 +335,7 @@ void Widget::nonlinearKernalC(int type, int r){
             vector<int> v;
             for(int k=0;k<r;k++){
                 for(int l=0;l<r;l++){
-                    v.push_back(qRed(withBorderIMG->pixel(j+k,i+k)));
+                    v.push_back(qRed(withBorderIMG->pixel(j+k,i+l)));
                 }
             }
             sort(v.begin(),v.end());
@@ -170,28 +381,6 @@ void Widget::nonlinearKernalC(int type, int r){
 }
 
 /* -----   Linear   ----- */
-/* Edge detection */
-void Widget::edgeDetection(){
-    int mask_data[5][5] = {
-        { 0,  0, -1,  0,  0},
-        { 0, -1, -2, -1,  0},
-        {-1, -2, 16, -1, -2},
-        { 0, -1, -2, -1,  0},
-        { 0,  0, -1,  0,  0}
-    };
-    vector<vector<double>> mask;
-    for(int i=0;i<5;i++){
-        vector<double> row;
-        for(int j=0;j<5;j++){
-            row.push_back(mask_data[i][j]);
-        }
-        mask.push_back(row);
-    }
-    QImage aftImg = linearKernalC(mask,5);
-    ui->label_aft->setPixmap(QPixmap::fromImage(aftImg.scaled(360,360,Qt::KeepAspectRatio)));
-}
-
-
 /* Create a custom kernal input linearKernalC() */
 /* Input: the size of custom kernal */
 void Widget::customKernal(int r){
@@ -204,7 +393,7 @@ void Widget::customKernal(int r){
         }
         mask.push_back(row);
     }
-    QImage aftImg = linearKernalC(mask,r);
+    QImage aftImg = linearKernalC(mask,r,true);
     ui->label_aft->setPixmap(QPixmap::fromImage(aftImg.scaled(360,360,Qt::KeepAspectRatio)));
 }
 
@@ -222,7 +411,7 @@ void Widget::gaussianKernal(int r){
         }
         mask.push_back(row);
     }
-    QImage aftImg = linearKernalC(mask,r);
+    QImage aftImg = linearKernalC(mask,r,true);
     ui->label_aft->setPixmap(QPixmap::fromImage(aftImg.scaled(360,360,Qt::KeepAspectRatio)));
 }
 
@@ -234,14 +423,14 @@ void Widget::boxKernal(int r){
         vector<double> row(r,1);
         mask.push_back(row);
     }
-    QImage aftImg = linearKernalC(mask,r);
+    QImage aftImg = linearKernalC(mask,r,true);
     ui->label_aft->setPixmap(QPixmap::fromImage(aftImg.scaled(360,360,Qt::KeepAspectRatio)));
 }
 
 /* Compute the linear kernal */
 /* Input:  2-d array, vector<vevtor<double>> */
 /* Return: the image after be computed, QImage */
-QImage Widget::linearKernalC(vector<vector<double>> vec, int r){
+QImage Widget::linearKernalC(vector<vector<double>> vec, int r, bool s){
     clock_t start, end;
     int diff_time;
     start = clock();
@@ -262,12 +451,14 @@ QImage Widget::linearKernalC(vector<vector<double>> vec, int r){
             double setPixel = 0;
             for(int k=r-1;k>=0;k--){
                 for(int l=r-1;l>=0;l--){
-                    setPixel += vec[k][l]*double(qRed(withBorderIMG->pixel(j+k,i+k)));
+                    setPixel += vec[k][l]*double(qRed(withBorderIMG->pixel(j+k,i+l)));
                 }
             }
             setPixel/=sum;
-            if(setPixel>255) setPixel=255;
-            if(setPixel<0) setPixel=0;
+            if(s){
+                if(setPixel>255) setPixel=255;
+                if(setPixel<0) setPixel=0;
+            }
             storeResultIMG->setPixel(j,i,qRgb(int(setPixel), int(setPixel), int(setPixel)));
         }
         double d = 100*i/(oriHeight+r)+1;
@@ -283,6 +474,7 @@ QImage Widget::linearKernalC(vector<vector<double>> vec, int r){
     end = clock();
     diff_time = (end-start)/1000;
     ui->label->setText(QString::number(diff_time));
+    cout << diff_time << endl;
     return *retureIMG;
 }
 
