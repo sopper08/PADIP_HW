@@ -35,6 +35,9 @@ void Widget::imgHough(){
         Vec4i l = lines[i];
         line( cdst, Point(l[0], l[1]), Point(l[2], l[3]), Scalar(0,0,255), 3, CV_AA);
     }
+    string s = "./proImg/hw6_hough-" + to_string(store) + ".jpg";
+    store++;
+    imwrite(s,cdst);
     displayIMG(ui->label_houghT_proImg,Mat2QImage(cdst));
 }
 
@@ -69,6 +72,9 @@ void Widget::imgFusion(){
     }
     Mat reverse = reverseHaar(combine);
     reverse.convertTo(reverse,CV_8UC1);
+    string s = "./proImg/hw6_f-" + to_string(store) + ".jpg";
+    store++;
+    imwrite(s,reverse);
     displayIMG(ui->label_fusionimg,Mat2QImage(reverse));
 }
 
@@ -156,6 +162,9 @@ void Widget::createCirImg(){
             }
         }
     }
+    string s = "./proImg/hw6-" + to_string(store) + ".jpg";
+    store++;
+    imwrite(s,dst3);
     processedImg = Mat::zeros(processedImg.size(),CV_8UC1);
     processedImg = dst3;
     displayIMG(ui->label_proImg,Mat2QImage(dst3));
@@ -181,6 +190,9 @@ void Widget::createWavyImg(){
             }
         }
     }
+    string s = "./proImg/hw6-" + to_string(store) + ".jpg";
+    store++;
+    imwrite(s,dst);
     processedImg = dst;
     displayIMG(ui->label_proImg,Mat2QImage(processedImg));
 //    imshow("456",dst);
@@ -212,6 +224,9 @@ void Widget::createTrapImg(){
     for(int i=0;i<4;i++)
         circle(dst,dstTri[i],5,Scalar(255,0,255),-1,CV_AA);
     processedImg = dst;
+    string s = "./proImg/hw6-" + to_string(store) + ".jpg";
+    store++;
+    imwrite(s,dst);
     displayIMG(ui->label_proImg,Mat2QImage(processedImg));
 }
 

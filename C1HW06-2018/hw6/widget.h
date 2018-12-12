@@ -36,6 +36,7 @@ private slots:
     void imgHough();
 
 private:
+    int store = 0;
     Ui::Widget *ui;
     Mat oriImg;
     Mat processedImg;
