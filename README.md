@@ -16,7 +16,7 @@
   * histogram equalization
 
 ## hw3  
-*more detail, please see [hw3/README](C1HW03-2018README.md).*
+*more detail, please see [hw3/README](C1HW03-2018/README.md).*
 * Filtering operation
 * Marr-Hildreth edge detection
 * Order-statistic filter
