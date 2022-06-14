@@ -1,5 +1,5 @@
 # README  
-*DSnP means Data Structure and Programming*
+*PADIP means Principles and Applications of Digital Image Processing*
 
 ## hw1  
 *more detail, please see [hw1/README](C1HW01-2018/README.md).*
