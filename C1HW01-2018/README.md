@@ -1,4 +1,13 @@
-# HW1_1 README  
+# README  
+
+## Problem  
+*more detail, please see [C1HW01-2018.pdf](./C1HW01-2018.pdf).*
+
+* Implement .64 image file reader.
+  * .64 image: 64x64 image with 32 gray levels
+* Plot the histogram of .64 image.
+* Implement arithmetic Operations of an Image Array.
+
 ## How to Use  
 * Step 0: 開啟 hw1_1_boxed.exe  
 ![](./img/11step1.png)  
