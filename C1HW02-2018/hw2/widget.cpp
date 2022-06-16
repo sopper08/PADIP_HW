@@ -266,11 +266,6 @@ void Widget::exec_spatial_resolution(int val){
                         +c*b*qRed(gaImg.pixel(x,y+1))
                         +a*b*qRed(gaImg.pixel(x+1,y+1));
             spatial_gaaimage->setPixel(i,j,qRgb(setPix,setPix,setPix));
-            setPix =     c*d*qRed(gbImg.pixel(x,y))
-                        +a*d*qRed(gbImg.pixel(x+1,y))
-                        +c*b*qRed(gbImg.pixel(x,y+1))
-                        +a*b*qRed(gbImg.pixel(x+1,y+1));
-            spatial_gbaimage->setPixel(i,j,qRgb(setPix,setPix,setPix));
         }
     }
     ui->label_GAA_i->setPixmap(QPixmap::fromImage(*spatial_gaaimage));
