@@ -41,12 +41,10 @@ void Widget::load_image(const QString &fileName, QImage* image, QLabel *label){
     label->setPixmap(QPixmap::fromImage(imgResize));
 }
 
-int Widget::convert_16_to_10(char c){
-    if(c>='0'&&c<='9'){
-        return c-'0';
-    }else{
-        return c-'A'+10;
-    }
+int Widget::ascii_hex_to_int(char c){
+    if (c>='0' && c<='9') return c-'0';
+    if (c>='A' && c<='F') return c-'A'+10;
+    return 0;
 }
 
 vector< vector<char> > Widget::read_file_to_2D_vector(const QString &fileName){
@@ -70,7 +68,7 @@ void Widget::convert_file_to_QImage(const QString &fileName, QImage* image){
     vector< vector<char> > image_vec = read_file_to_2D_vector(fileName);
     for(int i=0;i<image_vec.size();i++){
         for(int j=0;j<image_vec[i].size();j++){
-            int tmp_int = convert_16_to_10(image_vec[i][j]);
+            int tmp_int = ascii_hex_to_int(image_vec[i][j]);
             histogram[tmp_int]++;
             image->setPixel(j, i, qRgb(tmp_int*8, tmp_int*8, tmp_int*8));
         }

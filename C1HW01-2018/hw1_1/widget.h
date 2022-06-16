@@ -2,13 +2,9 @@
 #define WIDGET_H
 
 #include <QWidget>
-// QImage 儲存影像的物件
 #include <QImage>
-// QLabel 用來顯示圖像
 #include <QLabel>
-// QFileDialog 用來開啟檔案
 #include <QFileDialog>
-// 顯示直方圖
 #include <QtCharts>
 #include <fstream>
 #include <iostream>
@@ -42,7 +38,7 @@ private:
     void convert_file_to_QImage(const QString &fileName, QImage* image);
     void choose_image(const QString &title, QImage* image, QLabel* label);
     void load_image(const QString &fileName, QImage* image, QLabel* label);
-    int convert_16_to_10(char c);
+    int ascii_hex_to_int(char c);
     vector<vector<char>> read_file_to_2D_vector(const QString &fileName);
     int histogram[32] = {0};
 };
