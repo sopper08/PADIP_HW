@@ -12,3 +12,9 @@
   * YUV
 * Implement a program to display **a grayscale image in pseudo-color**
 * Implement a **image segmentation** by color clustering, using the k-means algorithm.
+
+## Program  
+
+## Usage  
+
+## Results

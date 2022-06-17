@@ -10,3 +10,9 @@
   * Gaussian filter
 * Implement a homomorphic filter.
 * Apply a 2-D frequency domain inverse filter and Wiener filter to remove motion blur of image.
+
+## Program  
+
+## Usage  
+
+## Results

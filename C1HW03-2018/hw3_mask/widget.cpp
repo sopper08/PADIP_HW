@@ -302,7 +302,7 @@ void Widget::edgeDetection(int t){
                 int pu = v[8-m];
                 if(pl*pu<0&&abs(pl-pu)>t) check++;
                 if(check>=2){
-                    setPix=255;
+                    setPix=255; 
                     break;
                 }
             }

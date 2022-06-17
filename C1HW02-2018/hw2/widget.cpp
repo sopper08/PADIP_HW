@@ -241,6 +241,7 @@ void Widget::set_value_of_scale(int val){
 void Widget::exec_spatial_resolution(int val){
     int valScale=val;
 
+
     ui->label_GAA_i->setPixmap(QPixmap::fromImage(gaaImg));
     int width = gaImg.width();
     int height = gaImg.height();
