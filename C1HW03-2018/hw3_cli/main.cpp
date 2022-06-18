@@ -1,7 +1,9 @@
 #include <iostream>
 #include <assert.h>
 #include <math.h>
+#include <string>
 #include <QImage>
+
 using namespace std;
 
 #define PI 3.14159265358979323846
@@ -23,7 +25,6 @@ int **log_filter(int filter_size, float sigma=1.4) {
             y = float(j-int(filter_size/2));
 
             t = -1.0*(pow(x, 2)+pow(y, 2))/(2*pow(sigma, 2));
-            cout << x << " " << y << " " << t << " " << d << endl;
             log = -1.0/(PI*pow(sigma, 4))*(1.0+t)*exp(t);
             
             filter[i][j] = round(d*log);
@@ -53,7 +54,7 @@ int **convolution(QImage &img, int **filter, int filter_size) {
                     int j_l;
 
                     j_l = int(j-(l-int(filter_size/2)));
-                    if((i_k<0)||(i_k>=width)||(j_l<0)||(j_l>=height)) {
+                    if((i_k<0)||(i_k>=height)||(j_l<0)||(j_l>=width)) {
                         pixel+=0;
                     }
                     else {
@@ -74,7 +75,6 @@ int **zero_crossing(int **c_r, int width, int height, int threshold=0) {
     for(int i=0; i<height; ++i) {
         c_g[i] = new int[width];
         for(int j=0; j<width; ++j) {
-            int count = 0;
             for(int k=-1; k<1; ++k) {
                 for(int l=-1; l<1; ++l) {
                     int t_px, n_px;
@@ -112,7 +112,7 @@ QImage int_array_to_QImage(int **array, int width, int height, int multiple=1) {
     return img;
 }
 
-QImage edge_detection(QImage &img, int &filter_size, float sigma=1.4, int threshold=0) {
+QImage edge_detection(QImage &img, int filter_size, float sigma=1.4, int threshold=0) {
     int **filter, **c_r, **c_g;
     int width, height;
     QImage img_out;
@@ -126,11 +126,25 @@ QImage edge_detection(QImage &img, int &filter_size, float sigma=1.4, int thresh
     return img_out;
 }
 
-int main() {
-    QImage img("./test.jpg");
-    int filter_size = 5;
-    QImage img_log = edge_detection(img, filter_size, 1.4, 0);
+int main(int argc, char *argv[]) {
+    string filename;
+    int filter_size;
+    float sigma;
+    int threshold;
+    QImage img = QImage(argv[1]);
+    QImage img_out;
 
-    img_log.save("./test_log.png");
+    filename = string(argv[1]);
+    filter_size = atoi(argv[2]);
+    sigma = atof(argv[3]);
+    threshold = atoi(argv[4]);
+
+    img_out = edge_detection(img, filter_size, sigma, threshold);
+
+    filename = 
+        filename.substr(0, filename.find_last_of('.')) +
+        "_" + argv[2] + "_" + argv[3] + "_" + argv[4] + ".png";
+    img_out.save(filename.c_str());
+
     return 0;
 }

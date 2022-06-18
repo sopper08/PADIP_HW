@@ -135,4 +135,16 @@ QImage edge_detection(QImage &img, int &filter_size, float sigma=1.4, int thresh
 ## Usage  
 
 ## Results
-### Marr-Hildreth edge detection v.s. Sobel operator  
+### Marr-Hildreth edge detection  
+* filter size= 3, 5, 7, ..., 25, sigma= 1.2, threshold= 0
+  ![](./imgs/1_diff_filter_size_03_25.jpg)
+  ![](./imgs/2_diff_filter_size_03_25.jpg)
+  ![](./imgs/3_diff_filter_size_03_25.jpg)
+* threshold= 0, 400, 800, 1200, 1600, 2000, 2400, 2800, 3200, 3600
+  * filter size= 13, sigma= 1.2, threshold= 0, 400, 800, ..., 4000
+    ![](./imgs/1_diff_threshold_0000_4000.jpg)
+  * filter size= 7, sigma= 1.2, threshold= 0, 400, 800, ..., 4000
+    ![](./imgs/2_diff_threshold_0000_4000.jpg)
+  * filter size= 5, sigma= 1.2, threshold= 0, 400, 800, ..., 4000
+    ![](./imgs/3_diff_threshold_0000_4000.jpg)
+  
