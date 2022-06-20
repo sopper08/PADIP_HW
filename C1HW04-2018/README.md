@@ -139,15 +139,15 @@ $ ./hw4_cli wf <image> <t> <a> <b> <k>```
 ### Homomorphic filter  
 
 * $\gamma_H$=1, 2, ..., 5; $\gamma_L$=0; c=1; d=1  
-    ![](./imgs/2_diff_g_h.jpg)
+![](./imgs/2_diff_g_h.jpg)
 
 * $\gamma_H$=3; $\gamma_L$=0, c=1, 2, ...,5; d=1  
-    ![](./imgs/2_diff_c.jpg)
+![](./imgs/2_diff_c.jpg)
 
 * $\gamma_H$=3; $\gamma_L$=0, c=2; d=1, 1.5, 2, 2.5, 3  
-    ![](./imgs/2_diff_d.jpg)
+![](./imgs/2_diff_d.jpg)
 
 ### Motion blur and Inverse filter v.s. Wiener filter
 origin, motion blurred, inverse filter and wiener filter
 * a=b=0.05  
-    ![](./imgs/ab_005.jpg)
+![](./imgs/ab_005.jpg)
