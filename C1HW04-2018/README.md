@@ -146,6 +146,7 @@ $ ./hw4_cli wf <image> <t> <a> <b> <k>```
   ![](./imgs/2_diff_c.jpg)
 
 * $\gamma_H$=3; $\gamma_L$=0, c=2; d=1, 1.5, 2, 2.5, 3
+  
   ![](./imgs/2_diff_d.jpg)
 
 ### Motion blur and Inverse filter v.s. Wiener filter
