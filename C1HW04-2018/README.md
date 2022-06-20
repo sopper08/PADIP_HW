@@ -137,8 +137,10 @@ $ ./hw4_cli wf <image> <t> <a> <b> <k>```
 
 ## Results  
 ### Homomorphic filter  
+![](./imgs/2_diff_g_h.jpg)
+
 * $\gamma_H$=1, 2, ..., 5; $\gamma_L$=0; c=1; d=1
-  ![](./imgs/2_diff_g_h.jpg)
+  ![](./imgs/ab_005.jpg)
 
 * $\gamma_H$=3; $\gamma_L$=0, c=1, 2, ...,5; d=1
   ![](./imgs/2_diff_c.jpg)
