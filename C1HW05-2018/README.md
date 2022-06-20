@@ -14,6 +14,10 @@
 * Implement a **image segmentation** by color clustering, using the k-means algorithm.
 
 ## Program  
+### pseudo-color  
+
+### Image segmentation
+
 
 ## Usage  
 

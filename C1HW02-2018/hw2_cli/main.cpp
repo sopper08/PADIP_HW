@@ -1,35 +1,11 @@
-# README  
+#include <iostream>
+#include <assert.h>
+#include <math.h>
+#include <string>
+#include <QImage>
 
-## Problem  
-*more detail, please see [C1HW02-2018.pdf](./C1HW02-2018.pdf).*
+using namespace std;
 
-* Convert a color image into a grayscale image, and display its histogram.
-* Implement
-  * a manual **threshold** function.
-  * a function to **adjust the spatial resolution** and grayscale levels of an image.
-  * a function to adjust the **brightness** and **constrast** of an image.
-  * a **histogram equalization** function for automatic constrast adjustment.
-
-## Program
-### Enlarge  
-![](./imgs/enlarge_equation.png)
-<!-- 
-\left\{\begin{matrix}
-x_1 = \left \lfloor \frac{u}{s} \right \rfloor, x_2=x_1+1
-\\ 
-y_1 = \left \lfloor \frac{v}{s} \right \rfloor, y_2=y_1+1
-\\
-a = u-x_1, c=1-a
-\\
-b = v-x_1, d=1-b
-\end{matrix}\right.
-\\
-f(u, y_1)=\frac{c}{a+c}f(x_1, y_1)+\frac{a}{a+c}f(x_2, y_1)=cf(x_1, y_1)+af(x_2, y_1)\\
-f(u, y_2)=cf(x_1, y_2)+af(x_2, y_2)\\
-\\
-f(u, v)=\frac{d}{b+d}f(u, y_1)+\frac{b}{b+d}f(u, y_2)=dcf(x_1, y_1)+daf(x_2, y_1)+bcf(x_1, y_2)+baf(x_2, y_2)
- -->
-```cpp
 QImage enlarge(QImage &img, int scaled) {
     int width, height;
     QImage s_img;
@@ -56,23 +32,12 @@ QImage enlarge(QImage &img, int scaled) {
                         c*b*qGray(img.pixel(  x, y+1)) +
                         a*b*qGray(img.pixel(x+1, y+1));
             }
-            s_img.setPixel(u, v, QRgb(pixel));
+            s_img.setPixel(u, v, qRgb(pixel, pixel, pixel));
         }
     }
     return s_img;
 }
-```
 
-### Histogram equalization  
-![](./imgs/he_equation.png)
-<!-- 
-$$
-p_r(r_k)=\frac{n_k}{MN}, k=0,1,2,...,L-1\\
-s_k=T(r_k)=(L-1)\sum_{j=0}^{k}p_r(r_j)=\frac{L-1}{MN}\sum_{j=0}^{k}n_j, k=0,1,2,...,L-1\\
-r_k=T^-1(s_k), k=0,1,2,...,L-1\\
-$$
- -->
-```cpp
 QImage histogram_equalization(QImage &img) {
     int width, height, pixel_sum;
     int gray_array[256] = {0};
@@ -111,23 +76,36 @@ QImage histogram_equalization(QImage &img) {
     }
     return he_img;
 }
-```
 
-## Usage  
-```sh
-$ cd hw2_cli
-$ qmake -makefile
-$ make
+int main(int argc, char *argv[]) {
+    if (argc < 3) {
+        cout << "Usage: " << argv[0] << " enlarge <image_file> <ratio>"<< endl;
+        cout << "Usage: " << argv[0] << " he <image_file>"<< endl;
+        return 1;
+    }
+    
+    string cmd(argv[1]);
+    QImage img(argv[2]);
+    QImage r_img;
 
-# enlarge
-$ ./hw2_cli enlarge <image_file> <ratio>
+    if (cmd.compare("enlarge") == 0) {
+        if (argc < 4) {
+            cout << "Usage: " << argv[0] << " enlarge <image_file> <ratio>"<< endl;
+            return 1;
+        }
+        int scaled = atoi(argv[3]);
+        r_img = enlarge(img, scaled);
+    }
+    else if (cmd.compare("he") == 0) {
+        r_img = histogram_equalization(img);
+    }
+    else {
+        cout << "Usage: " << argv[0] << " enlarge <image_file> <ratio>"<< endl;
+        cout << "Usage: " << argv[0] << " he <image_file>"<< endl;
+        return 1;
+    }
 
-# histogram equalization
-$ ./hw2_cli he <image_file>
-```
+    r_img.save("result.png");
 
-## Results  
-### Histogram equalization  
-* before/after
-    ![](./imgs/1_hq.jpg)
-    ![](./imgs/2_hq.jpg)
+    return 0;
+}

@@ -19,8 +19,9 @@
 LoG(x,y)=\frac{x^2+y^2–\sigma^2}{2\pi \sigma^6}e^{-\frac{x^2+y^2}{2\sigma^2}}
 $$ -->
 ### Marr-Hildreth edge detection  
-1. LoG filter
-  ![](./imgs/log_equation.png) 
+1. LoG filter  
+    ![](./imgs/log_equation.png) 
+
     ```cpp
     int **log_filter(int filter_size, float sigma=1.4) {
         assert(filter_size%2==1);
@@ -133,18 +134,24 @@ QImage edge_detection(QImage &img, int &filter_size, float sigma=1.4, int thresh
 ```
 
 ## Usage  
+```sh
+$ cd hw3_cli
+$ qmake -makefile
+$ make
+$ ./hw3_cli <path-to-image> <filter_size> <sigma> <threshold>
+```
 
 ## Results
 ### Marr-Hildreth edge detection  
-* filter size= 3, 5, 7, ..., 25, sigma= 1.2, threshold= 0
+* filter size= 3, 5, 7, ..., 25; sigma= 1.2; threshold= 0
   ![](./imgs/1_diff_filter_size_03_25.jpg)
   ![](./imgs/2_diff_filter_size_03_25.jpg)
   ![](./imgs/3_diff_filter_size_03_25.jpg)
 * threshold= 0, 400, 800, 1200, 1600, 2000, 2400, 2800, 3200, 3600
-  * filter size= 13, sigma= 1.2, threshold= 0, 400, 800, ..., 4000
+  * filter size= 13; sigma= 1.2; threshold= 0, 400, 800, ..., 4000
     ![](./imgs/1_diff_threshold_0000_4000.jpg)
-  * filter size= 7, sigma= 1.2, threshold= 0, 400, 800, ..., 4000
+  * filter size= 7; sigma= 1.2; threshold= 0, 400, 800, ..., 4000
     ![](./imgs/2_diff_threshold_0000_4000.jpg)
-  * filter size= 5, sigma= 1.2, threshold= 0, 400, 800, ..., 4000
+  * filter size= 5; sigma= 1.2; threshold= 0, 400, 800, ..., 4000
     ![](./imgs/3_diff_threshold_0000_4000.jpg)
   

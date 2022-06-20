@@ -1,6 +1,17 @@
 # README  
 *PADIP means Principles and Applications of Digital Image Processing*
 
+## My Tool  
+### Concatenate images  
+```sh
+$ python3 long_long_image.py <image-folder>
+# [ ], [ ], [ ] -> [ | | ]
+```
+### Convert to .jpg file  
+```sh
+$ python3 to_jpg.py <filename>
+```
+
 ## hw1  
 *more detail, please see [hw1/README](C1HW01-2018/README.md).*
 * .64 image file reader

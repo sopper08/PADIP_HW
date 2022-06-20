@@ -14,19 +14,15 @@
 ### ''0', 1', ..., '9', 'A', 'B', ... 'F' -> 0, 1, ..., 9, 10, 11, ..., 15
 
 ```cpp
-...
-int Widget::ascii_hex_to_int(char c){
+int ascii_hex_to_int(char c){
     if (c>='0' && c<='9') return c-'0';
     if (c>='A' && c<='F') return c-'A'+10;
     return 0;
 }
-...
 ```
 
 ### Arithmetic Operations of an Image Array
-
 ```cpp
-...
 void function(QImage &qimg) {
     int width, height;
     
@@ -35,12 +31,13 @@ void function(QImage &qimg) {
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             QRgb rgb = qimg.pixel(i, j);
-            # do something
+            /*
+                do something
+            */
             qimg.setPixel(i, j, rgb);
         }
     }
 }
-...
 ```
 
 ## Usage

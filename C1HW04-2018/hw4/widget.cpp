@@ -483,7 +483,8 @@ void Widget::choose_folder(){
 }
 
 void Widget::displayOriIMG(int d){
-    OriImg.img_S = imread(img_vec[d].path.toStdString(), IMREAD_GRAYSCALE);
+    string f = img_vec[d].path.toStdString();
+    OriImg.img_S = imread(f.c_str(), IMREAD_GRAYSCALE);
     QImage oriImg_QIMG = Mat2QImage(OriImg.img_S);
     displayIMG(ui->label_OriImg, oriImg_QIMG);
     OriImg.img_F = imageFFT(OriImg.img_S);

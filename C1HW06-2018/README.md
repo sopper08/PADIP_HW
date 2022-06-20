@@ -8,6 +8,9 @@
 * Apply a Hough transform method.
 
 ## Program  
+### DWT method  
+
+### Hough transform method  
 
 ## Usage  
 
