@@ -1,7 +1,7 @@
 # README  
 *PADIP means Principles and Applications of Digital Image Processing*
 
-## My Tool  
+## My Tool  ****
 ### Concatenate images  
 ```sh
 $ python3 long_long_image.py <image-folder>
@@ -26,11 +26,16 @@ $ python3 to_jpg.py <filename>
   * brightness, constrast
   * histogram equalization
 
+![](./C1HW02-2018/imgs/1_2_hq.jpg)
+
 ## hw3  
 *more detail, please see [hw3/README](C1HW03-2018/README.md).*
 * Filtering operation
 * Marr-Hildreth edge detection
 * Order-statistic filter
+
+![](./C1HW03-2018/imgs/2_diff_threshold_0000_4000.jpg)
+![](./C1HW03-2018/imgs/3_diff_threshold_0000_4000.jpg)
 
 ## hw4  
 *more detail, please see [hw4/README](C1HW04-2018/README.md).*
@@ -39,11 +44,16 @@ $ python3 to_jpg.py <filename>
 * homomorphic filter
 * remove motion blur of image
 
+![](./C1HW04-2018/imgs/2_diff_d.jpg)
+![](./C1HW04-2018/imgs/ab_005.jpg)
+
 ## hw5  
 *more detail, please see [hw5/README](C1HW05-2018/README.md).*
 * color model conversion
 * pseudo-color
 * image segmentation
+
+![](./C1HW05-2018/imgs/5_is.jpg)
 
 ## hw6  
 *more detail, please see [hw6/README](C1HW06-2018/README.md).*

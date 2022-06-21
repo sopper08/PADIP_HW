@@ -28,16 +28,19 @@ def main():
         print("No images found")
         return
     
-    long_long_image = images[0]
-    for i in range(1, len(images)):
-        long_long_image = np.concatenate((long_long_image, images[i]), axis=1)
+    # long_long_image = images[0]
+    max_height = max([image.shape[0] for image in images])
+    images = [cv.resize(image, (0, 0), fx=max_height/image.shape[0], fy=max_height/image.shape[0]) for image in images]
+    images = np.concatenate(images, axis=1)
+    # for i in range(1, len(images)):
+        # long_long_image = np.concatenate((long_long_image, images[i]), axis=1)
 
-    cv.imshow("Results", long_long_image)
+    cv.imshow("Results", images)
     cv.waitKey(0)
     cv.destroyAllWindows()
 
-    long_long_image_path = image_folder / "long_long_image.jpg"
-    cv.imwrite(str(long_long_image_path), long_long_image)
+    images_path = image_folder / "long_long_image.jpg"
+    cv.imwrite(str(images_path), images)
 
 if __name__ == '__main__':
     main()
