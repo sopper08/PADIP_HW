@@ -4,6 +4,7 @@
 
 TEMPLATE = app
 TARGET = hw5_cli
+INCLUDEPATH += .
 INCLUDEPATH += /usr/local/include
 INCLUDEPATH += /usr/local/include/opencv4
 

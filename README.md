@@ -1,7 +1,7 @@
 # README  
 *PADIP means Principles and Applications of Digital Image Processing*
 
-## My Tool  ****
+## My Tool  
 ### Concatenate images  
 ```sh
 $ python3 long_long_image.py <image-folder>
@@ -57,6 +57,7 @@ $ python3 to_jpg.py <filename>
 
 ## hw6  
 *more detail, please see [hw6/README](C1HW06-2018/README.md).*
-* geometric transformation
 * DWT method
 * Hough transform method
+![](./C1HW06-2018/imgs/clock.jpg)
+![](./C1HW06-2018/imgs/MRI.jpg)
