@@ -43,61 +43,17 @@ void function(QImage &qimg) {
 ## Usage
 
 ### hw1_1
-
-1. Make and execute   
-
-   ```sh
-   $ cd ./hw1_1
-   $ qmake -makefile
-   $ make
-   $ ./hw1_1
-   ```
-
-2. Functions
-
-   * `Choose your .64 image`
-   * `Plot the image histogram`
-   * `Reset`
-
-    ![](./imgs/11step3.png)
+```sh
+$ cd ./hw1_1
+$ qmake -makefile
+$ make
+$ ./hw1_1
+```
 
 ### hw1_2
-
-1. Make and execute   
-
-   ```sh
-   $ cd ./hw1_2
-   $ qmake -makefile
-   $ make
-   $ ./hw1_2
-   ```
-
-2. Functions
-
-   * Choose the function
-     * \+, -
-     * \*
-     * Average of two images
-     * g(x, y) \= f(x, y) - f(x-1, y-1)
-
-      ![](./imgs/f1constant1.png)
-
-## Results
-
-### \+, -
-
-![](./imgs/f1constantp5.png )
-
-![](./imgs/f1constantn5.png)
-
-### \*
-
-![](./imgs/f2constant0.5.png)
-
-![](./imgs/f2constant2.png)
-
-### Average of two images
-![](./imgs/f3.png)
-
-### g(x, y) \= f(x, y) - f(x-1, y-1)
-![](./imgs/f4.png)
+```sh
+$ cd ./hw1_2
+$ qmake -makefile
+$ make
+$ ./hw1_2
+```
