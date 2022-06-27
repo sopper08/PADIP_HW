@@ -59,5 +59,6 @@ $ python3 to_jpg.py <filename>
 *more detail, please see [hw6/README](C1HW06-2018/README.md).*
 * DWT method
 * Hough transform method
+
 ![](./C1HW06-2018/imgs/clock.jpg)
 ![](./C1HW06-2018/imgs/MRI.jpg)
